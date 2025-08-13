@@ -1,0 +1,56 @@
+
+:root{
+  --bg-purple: #8B5CF6;     /* page background */
+  --btn-purple: #6D4AFF;    /* primary button */
+  --btn-purple-hover:#5B3FE6;
+  --text-gray:#6B7280;      /* field text */
+  --placeholder:#9CA3AF;    /* placeholder + icons */
+  --border:#E5E7EB;         /* input border */
+  --card-radius:12px;
+  --input-radius:10px;
+  --shadow: 0 8px 20px rgba(0,0,0,.18);
+}
+html,body{height:100%;}
+body{
+  background:var(--bg-purple);
+  display:flex; align-items:center; justify-content:center;
+  margin:0;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.auth-card{
+  background:#fff; color:#111827;
+  border-radius:var(--card-radius);
+  box-shadow:var(--shadow);
+  padding:2rem;
+  min-width:340px;
+}
+/* Input rows with icon on the left */
+.input-group-text{
+  background:#fff;
+  border-right:none;
+  color:var(--placeholder);
+}
+.form-control{
+  background:#fff;
+  border-left:none;
+  border-color:var(--border);
+  color:var(--text-gray);
+}
+.form-control::placeholder{ color:var(--placeholder); opacity:1; }
+.input-group .form-control:focus{
+  box-shadow:none;
+  border-color:var(--border);
+}
+
+.btn-primary{
+  --bs-btn-bg: var(--btn-purple);
+  --bs-btn-border-color: var(--btn-purple);
+  --bs-btn-hover-bg: var(--btn-purple-hover);
+  --bs-btn-hover-border-color: var(--btn-purple-hover);
+  border-radius:8px;
+  padding:.5rem 1.25rem;
+  font-weight:600;
+}
+.small-muted{ color:#6b7280; }
+a.link{ color:#4f46e5; text-decoration:none; }
+a.link:hover{ text-decoration:underline; }

@@ -1,0 +1,20 @@
+# File di sistema di macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# File di sistema di Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# File di configurazione locale che possono contenere dati sensibili
+.env
+
+# Cartelle di dipendenze
+/vendor/
+/node_modules/
+
+# File di log
+*.log
+logs/
