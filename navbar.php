@@ -9,20 +9,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item me-2">
-                    <button id="themetoggle" type="button" class="btn btn-outline-secondary" data-bs-toggle="button"><i class="bi bi-moon-stars-fill"></i></button>
+                    <button id="themetoggle" type="button" class="btn btn-outline-secondary" data-bs-toggle="button"><i class="bi-brightness-high-fill"></i></button>
                     <script>
                         const toggleButton = document.getElementById('themetoggle')
-                        const icon = toggleButton.querySelector("i")
+                        const themeIcon = toggleButton.querySelector("i")
                         toggleButton.addEventListener("click", () => {
-                            if (toggleButton.classList.contains("active")) {
-                                document.documentElement.setAttribute("data-bs-theme", "dark")
-                                icon.classList.remove("bi-moon-stars-fill")
-                                icon.classList.add("bi-brightness-high-fill")
-                            } else {
-                                document.documentElement.setAttribute("data-bs-theme", "light")
-                                icon.classList.remove("bi-brightness-high-fill")
-                                icon.classList.add("bi-moon-stars-fill")
-                            }
+                            const isActive = toggleButton.classList.contains("active")
+                            document.documentElement.setAttribute("data-bs-theme", isActive ? "dark" : "light")
+                            themeIcon.classList.toggle("bi-moon-stars-fill", isActive)
+                            themeIcon.classList.toggle("bi-brightness-high-fill", !isActive)
                         })
                     </script>
                 </li>
