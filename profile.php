@@ -10,14 +10,55 @@
     <?php require_once "navbar.php"; ?>
     <div class="container-fluid">
       <div class="row">
+        <!-- Profile Card -->
         <div class="col-auto">
           <div class="card text-center my-3" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">email@mail.com</h5>
-              <a href="#" class="btn btn-primary">Edit</a>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
             </div>
           </div>
         </div>
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Change credentials</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                  <label for="floatingInput">New email address</label>
+                </div>
+                <div class="input-group">
+                  <div class="form-floating">
+                    <input id="floatingPassword" type="password" class="form-control" placeholder="Password">
+                    <label for="floatingPassword">New password</label>
+                  </div>
+                  <button id="showButton" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-fill"></i></button>
+                  <script>
+                    const showButton = document.getElementById("showButton")
+                    const showIcon = showButton.querySelector("i")
+                    const password = document.getElementById("floatingPassword")
+                    showButton.addEventListener("click", () => {
+                      const isPassword = password.getAttribute("type") === "password"
+                      password.setAttribute("type", isPassword ? "text" : "password")
+                      showIcon.classList.toggle("bi-eye-fill", !isPassword)
+                      showIcon.classList.toggle("bi-eye-slash-fill", isPassword)
+                    })
+                  </script>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Order history -->
         <div class="col">
           <h1 class="my-2">Order History</h1>
           <table class="table">
