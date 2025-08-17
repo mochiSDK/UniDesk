@@ -39,19 +39,30 @@
                         <th scope="row">1</th>
                         <td>Product name</td>
                         <td>Model</td>
-                        <td><button type="button" class="btn btn-primary"><i class="bi bi-eye-fill"></i></button></td>
+                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal"><i class="bi bi-eye-fill"></i></button></td>
                         <td>9,99€</td>
                         <td>200</td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Product name</td>
-                        <td>Model</td>
-                        <td><button type="button" class="btn btn-primary"><i class="bi bi-eye-fill"></i></button></td>
-                        <td>5,25€</td>
-                        <td>125</td>
-                    </tr>
                 </tbody>
+                <!-- Image Modal -->
+                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="imageModalLabel">Product Image</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="..." class="img-thumbnail mb-3" alt="...">
+                                <input class="form-control" type="file" accept="image/*" id="formFile">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </table>
         </div>
     </div>
