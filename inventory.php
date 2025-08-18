@@ -32,6 +32,7 @@
                         <th scope="col">Image</th>
                         <th scope="col">Price</th>
                         <th scope="col">Amount</th>
+                        <th scope="col" style="width: 10%;">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,7 @@
                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal"><i class="bi bi-eye-fill"></i></button></td>
                         <td>9,99€</td>
                         <td>200</td>
+                        <td><button type="button" class="btn btn-secondary"><i class="bi bi-pencil-square"></i></button></td>
                     </tr>
                 </tbody>
                 <!-- Image Modal -->
