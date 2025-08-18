@@ -1,15 +1,14 @@
 <?php
-// Includi il file di configurazione del database.
 require_once 'includes/db_config.php';
 
-// 1. Recupera l'ID del prodotto dall'URL
+// 1. Get product ID from URL
 if (isset($_GET['ProductId']) && !empty($_GET['ProductId'])) {
     $product_id = $_GET['ProductId'];
 } else {
     die("ERRORE: ID del prodotto non specificato.");
 }
 
-// 2. Prepara ed esegui la query per recuperare i dati del prodotto
+// 2. Query to get Products info
 $sql = "SELECT * FROM PRODUCTS WHERE ProductId = ?";
 
 if ($stmt = $conn->prepare($sql)) {
@@ -36,22 +35,21 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo htmlspecialchars($product['Name']); ?> - UniDesk</title>
     
-    <!-- Bootstrap e icone -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     
-    <!-- Link al foglio di stile separato -->
+    <!-- Stylesheet link -->
     <link href="assets/product_style.css" rel="stylesheet">
 </head>
 <body>
 
 <?php 
-// Includi la navbar dalla cartella principale.
 require_once 'navbar.php'; 
 ?>
 
 <div class="container my-5">
-    <!-- Card Dettagli Prodotto -->
+    <!-- Card Product Details -->
     <div class="product-card p-4">
         <div class="row g-5">
             <div class="col-lg-5 text-center">

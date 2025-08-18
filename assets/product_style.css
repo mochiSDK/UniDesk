@@ -1,4 +1,4 @@
-/* Stili per la pagina del prodotto */
+/* Stylesheet for product page */
 body { 
     background-color: #f8f9fa; 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -46,9 +46,6 @@ body {
     display: inline-block;
 }
 
-/* --- MODIFICHE AI BOTTONI --- */
-
-/* Contenitore per allineare e dimensionare tutti i bottoni */
 .action-buttons-container {
     max-width: 200px; 
 }
@@ -68,27 +65,26 @@ body {
     border-color: #6a4fe1;
 }
 
-/* Stile base per i bottoni secondari */
 .btn-wishlist, .btn-compare {
     font-weight: 500;
-    border: 1px solid transparent; /* Rimuoviamo il bordo visibile */
+    border: 1px solid transparent; 
     padding-top: .5rem;
     padding-bottom: .5rem;
 }
 
-/* Stile specifico per il bottone Wishlist */
+/* Wishlist button style */
 .btn-wishlist {
-    background-color: #f0f2f5; /* Sfondo grigio chiaro */
-    color: #212529; /* Testo nero */
+    background-color: #f0f2f5; 
+    color: #212529; 
 }
 .btn-wishlist:hover {
     background-color: #e2e6ea;
 }
 
-/* Stile specifico per il bottone Compare */
+/* Compare button style */
 .btn-compare {
-    background-color: #e8e3f9; /* Sfondo lilla chiaro */
-    color: #7A5CFA; /* Testo viola */
+    background-color: #e8e3f9; 
+    color: #7A5CFA; 
 }
 .btn-compare:hover {
     background-color: #e9e4ff;
