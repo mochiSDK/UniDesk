@@ -17,8 +17,45 @@
         <div class="row mb-2">
             <div class="col">
                 <div class="input-group ms-auto" style="max-width: 25%;">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon"><i class="bi bi-plus-circle-fill"></i></button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon" data-bs-toggle="modal" data-bs-target="#addProductModal"><i class="bi bi-plus-circle-fill"></i></button>
                     <input type="text" class="form-control" placeholder="Search product" aria-label="Search" aria-describedby="button-addon">
+                </div>
+                <!-- Add Product Modal -->
+                <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="addProductModalLabel">Add Product</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nameInput1" class="form-label">Name</label>
+                                    <input class="form-control" id="nameInput1" placeholder="Product name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="modelInput1" class="form-label">Model</label>
+                                    <input class="form-control" id="modelInput1" placeholder="Product model">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile1" class="form-label">Image</label>
+                                    <input class="form-control" type="file" accept="image/*" id="formFile1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="priceInput1" class="form-label">Price</label>
+                                    <input type="number" min="0" class="form-control" id="priceInput1" placeholder="Product price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="amountInput1" class="form-label">Amount</label>
+                                    <input type="number" min="0" class="form-control" id="amountInput1" placeholder="Amount in stock">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +80,7 @@
                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal"><i class="bi bi-eye-fill"></i></button></td>
                         <td>9,99€</td>
                         <td>200</td>
-                        <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square"></i></button></td>
+                        <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editProductModal"><i class="bi bi-pencil-square"></i></button></td>
                     </tr>
                 </tbody>
                 <!-- Image Modal -->
@@ -64,8 +101,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Edit Modal -->
-                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <!-- Edit Product Modal -->
+                <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -74,24 +111,24 @@
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="nameInput" class="form-label">Name</label>
-                                    <input class="form-control" id="nameInput" placeholder="Product name">
+                                    <label for="nameInput2" class="form-label">Name</label>
+                                    <input class="form-control" id="nameInput2" placeholder="Product name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="modelInput" class="form-label">Model</label>
-                                    <input class="form-control" id="modelInput" placeholder="Product model">
+                                    <label for="modelInput2" class="form-label">Model</label>
+                                    <input class="form-control" id="modelInput2" placeholder="Product model">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" accept="image/*" id="formFile">
+                                    <label for="formFile2" class="form-label">Image</label>
+                                    <input class="form-control" type="file" accept="image/*" id="formFile2">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="priceInput" class="form-label">Price</label>
-                                    <input type="number" min="0" class="form-control" id="priceInput" placeholder="Product price">
+                                    <label for="priceInput2" class="form-label">Price</label>
+                                    <input type="number" min="0" class="form-control" id="priceInput2" placeholder="Product price">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="amountInput" class="form-label">Amount</label>
-                                    <input type="number" min="0" class="form-control" id="amountInput" placeholder="Amount in stock">
+                                    <label for="amountInput2" class="form-label">Amount</label>
+                                    <input type="number" min="0" class="form-control" id="amountInput2" placeholder="Amount in stock">
                                 </div>
                             </div>
                             <div class="modal-footer">
