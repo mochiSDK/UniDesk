@@ -43,7 +43,7 @@
                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal"><i class="bi bi-eye-fill"></i></button></td>
                         <td>9,99€</td>
                         <td>200</td>
-                        <td><button type="button" class="btn btn-secondary"><i class="bi bi-pencil-square"></i></button></td>
+                        <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square"></i></button></td>
                     </tr>
                 </tbody>
                 <!-- Image Modal -->
@@ -56,7 +56,43 @@
                             </div>
                             <div class="modal-body">
                                 <img src="..." class="img-thumbnail mb-3" alt="...">
-                                <input class="form-control" type="file" accept="image/*" id="formFile">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Edit Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="editModalLabel">Edit Product</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nameInput" class="form-label">Name</label>
+                                    <input class="form-control" id="nameInput" placeholder="Product name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="modelInput" class="form-label">Model</label>
+                                    <input class="form-control" id="modelInput" placeholder="Product model">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Image</label>
+                                    <input class="form-control" type="file" accept="image/*" id="formFile">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="priceInput" class="form-label">Price</label>
+                                    <input type="number" min="0" class="form-control" id="priceInput" placeholder="Product price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="amountInput" class="form-label">Amount</label>
+                                    <input type="number" min="0" class="form-control" id="amountInput" placeholder="Amount in stock">
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
