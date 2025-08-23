@@ -1,29 +1,20 @@
 ﻿<?php
 session_start();
+require_once("db/database_helper.php");
+$db_helper = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
 
-// Se l'utente non è loggato, lo reindirizza alla pagina di accesso.
+// If user is not logged in, and is NOT already on signin page, redirect
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: signin_form.php");
-    exit;
+    if (basename($_SERVER['PHP_SELF']) !== "signin_form.php") {
+        header("Location: signin_form.php");
+        exit;
+    }
+}
+// If user is logged in and tries to access signin page, redirect them away
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    if (basename($_SERVER['PHP_SELF']) === "signin_form.php") {
+        header("Location: index.php");
+        exit;
+    }
 }
 ?>
-<!doctype html>
-<html lang="it">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles_exact.css" rel="stylesheet">
-</head>
-<body>
-    <div class="auth-card">
-        <h4 class="text-center">Benvenuto, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h4>
-        <p class="text-center mt-3">Sei stato autenticato con successo.</p>
-        <div class="d-grid mt-4">
-            <a href="logout.php" class="btn btn-primary">Logout</a>
-        </div>
-    </div>
-</body>
-</html>
-
