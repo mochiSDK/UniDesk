@@ -15,7 +15,7 @@
             <?php foreach ($templateParams["categories"] as $category): ?>
                 <div class="col">
                     <div class="card mt-3 mb-3" style="max-width: 250px;">
-                        <img src="..." class="card-img" style="max-height: 100px; object-fit: cover;" alt=" ...">
+                        <img src="<?php echo $category["Picture"]; ?>" class="card-img" style="max-height: 100px; object-fit: cover;" alt=" ...">
                         <div class="card-img-overlay bg-dark bg-opacity-50 d-flex align-items-end">
                             <h3 class="card-title fw-bold text-white"><?php echo $category["Name"]; ?></h3>
                         </div>
