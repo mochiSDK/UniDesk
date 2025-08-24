@@ -11,10 +11,10 @@
 <body>
     <?php require_once "navbar.php"; ?>
     <div class="container text-start">
-        <div class="row">
+        <div class="row flex-nowrap overflow-auto">
             <?php foreach ($templateParams["categories"] as $category): ?>
                 <div class="col">
-                    <div class="card mt-3 mb-3" style="max-width: 250px;">
+                    <div class="card mt-3 mb-3" style="min-width: 200px; max-width: 200px;">
                         <img src="<?php echo $category["Picture"]; ?>" class="card-img" style="max-height: 100px; object-fit: cover;" alt=" ...">
                         <div class="card-img-overlay bg-dark bg-opacity-50 d-flex align-items-end">
                             <h3 class="card-title fw-bold text-white"><?php echo $category["Name"]; ?></h3>
