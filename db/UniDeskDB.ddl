@@ -56,6 +56,7 @@ create table PRODUCTS (
 create table PRODUCT_CATEGORIES (
      CategoryId char(254) not null,
      Name char(254) not null,
+     Picture char(254),
      constraint ID_PRODUCT_CATEGORY_ID primary key (CategoryId));
 
 create table PRODUCT_MODELS (
