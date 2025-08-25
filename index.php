@@ -1,5 +1,5 @@
 <?php
-require_once("dashboard.php");
+require_once("bootstrap.php");
 
 $templateParams["categories"] = $db_helper->getCategories();
 $templateParams["bestSellers"] = $db_helper->getBestSellers(10);
