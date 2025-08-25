@@ -14,12 +14,12 @@
         <div class="row flex-nowrap overflow-auto">
             <?php foreach ($templateParams["categories"] as $category): ?>
                 <div class="col">
-                    <div class="card mt-3 mb-3" style="min-width: 200px; max-width: 200px;">
+                    <a href="#" class="card mt-3 mb-3 text-decoration-none" style="min-width: 200px; max-width: 200px;">
                         <img src="<?php echo $category["Picture"]; ?>" class="card-img" style="max-height: 100px; object-fit: cover;" alt=" ...">
                         <div class="card-img-overlay bg-dark bg-opacity-50 d-flex align-items-end">
                             <h3 class="card-title fw-bold text-white"><?php echo $category["Name"]; ?></h3>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -27,7 +27,7 @@
         <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-4">
             <?php foreach ($templateParams["bestSellers"] as $product): ?>
                 <div class="col">
-                    <div class="card h-100 mb-3" style="max-width: 250px;">
+                    <a href="#" class="card h-100 mb-3 text-decoration-none" style="max-width: 250px;">
                         <div class="position-relative">
                             <img src="<?php echo $product["Picture"] ?>" class="card-img-top border-bottom" style="max-height: 200px; object-fit: contain;" alt="...">
                             <span class="badge rounded-pill text-bg-primary position-absolute bottom-0 end-0 me-2 mb-2 fs-6">€<?php echo $product["Price"]; ?></span>
@@ -36,7 +36,7 @@
                             <h5 class="card-title"><?php echo $product["Name"]; ?></h5>
                             <p class="card-text"><?php echo $product["Description"]; ?></p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -44,7 +44,7 @@
         <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-4">
             <?php foreach ($templateParams["randomProducts"] as $product): ?>
                 <div class="col">
-                    <div class="card h-100 mb-3" style="max-width: 250px;">
+                    <a href="#" class="card h-100 mb-3 text-decoration-none" style="max-width: 250px;">
                         <div class="position-relative">
                             <img src="<?php echo $product["Picture"] ?>" class="card-img-top border-bottom" style="max-height: 200px; object-fit: contain;" alt="...">
                             <span class="badge rounded-pill text-bg-primary position-absolute bottom-0 end-0 me-2 mb-2 fs-6">€<?php echo $product["Price"]; ?></span>
@@ -53,7 +53,7 @@
                             <h5 class="card-title"><?php echo $product["Name"]; ?></h5>
                             <p class="card-text"><?php echo $product["Description"]; ?></p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
