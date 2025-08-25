@@ -65,4 +65,21 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getInventory() {
+        $query = "SELECT
+                p.ProductId,
+                p.Name,
+                m.Name AS Model,
+                Picture,
+                Price,
+                Amount
+            FROM PRODUCTS p
+            LEFT JOIN PRODUCT_MODELS m ON p.ProductId = m.ProductId
+            ORDER BY p.Name
+        ";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

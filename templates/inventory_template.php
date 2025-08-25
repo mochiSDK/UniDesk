@@ -30,24 +30,24 @@
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="nameInput1" class="form-label">Name</label>
-                                    <input class="form-control" id="nameInput1" placeholder="Product name">
+                                    <label for="nameInput" class="form-label">Name</label>
+                                    <input class="form-control" id="nameInput" placeholder="Product name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="modelInput1" class="form-label">Model</label>
-                                    <input class="form-control" id="modelInput1" placeholder="Product model">
+                                    <label for="modelInput" class="form-label">Model</label>
+                                    <input class="form-control" id="modelInput" placeholder="Product model">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formFile1" class="form-label">Image</label>
-                                    <input class="form-control" type="file" accept="image/*" id="formFile1">
+                                    <label for="formFile" class="form-label">Image</label>
+                                    <input class="form-control" type="file" accept="image/*" id="formFile">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="priceInput1" class="form-label">Price</label>
-                                    <input type="number" min="0" class="form-control" id="priceInput1" placeholder="Product price">
+                                    <label for="priceInput" class="form-label">Price</label>
+                                    <input type="number" min="0" class="form-control" id="priceInput" placeholder="Product price">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="amountInput1" class="form-label">Amount</label>
-                                    <input type="number" min="0" class="form-control" id="amountInput1" placeholder="Amount in stock">
+                                    <label for="amountInput" class="form-label">Amount</label>
+                                    <input type="number" min="0" class="form-control" id="amountInput" placeholder="Amount in stock">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -73,71 +73,73 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Product name</td>
-                        <td>Model</td>
-                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal"><i class="bi bi-eye-fill"></i></button></td>
-                        <td>9,99€</td>
-                        <td>200</td>
-                        <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editProductModal"><i class="bi bi-pencil-square"></i></button></td>
-                    </tr>
+                    <?php foreach ($templateParams["inventory"] as $product): ?>
+                        <tr>
+                            <th scope="row"><?php echo $product["ProductId"]; ?></th>
+                            <td><?php echo $product["Name"]; ?></td>
+                            <td><?php echo $product["Model"]; ?></td>
+                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal<?php echo $product["ProductId"]; ?>"><i class="bi bi-eye-fill"></i></button></td>
+                            <td><?php echo $product["Price"]; ?>€</td>
+                            <td><?php echo $product["Amount"]; ?></td>
+                            <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editProductModal<?php echo $product["ProductId"]; ?>"><i class="bi bi-pencil-square"></i></button></td>
+                        </tr>
+                        <!-- Image Modal -->
+                        <div class="modal fade" id="imageModal<?php echo $product["ProductId"]; ?>" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="imageModalLabel<?php echo $product["ProductId"]; ?>">Product Image</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="<?php echo $product["Picture"]; ?>" class="img-thumbnail mx-auto d-block mb-3" alt="Product image">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Edit Product Modal -->
+                        <div class="modal fade" id="editProductModal<?php echo $product["ProductId"]; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="editModalLabel<?php echo $product["ProductId"]; ?>">Edit Product</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nameInput<?php echo $product["ProductId"]; ?>" class="form-label">Name</label>
+                                            <input class="form-control" id="nameInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Name"]; ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="modelInput<?php echo $product["ProductId"]; ?>" class="form-label">Model</label>
+                                            <input class="form-control" id="modelInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Model"]; ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="formFile<?php echo $product["ProductId"]; ?>" class="form-label">Image</label>
+                                            <input class="form-control" type="file" accept="image/*" id="formFile<?php echo $product["ProductId"]; ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="priceInput<?php echo $product["ProductId"]; ?>" class="form-label">Price</label>
+                                            <input type="number" min="0" class="form-control" id="priceInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Price"]; ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="amountInput<?php echo $product["ProductId"]; ?>" class="form-label">Amount</label>
+                                            <input type="number" min="0" class="form-control" id="amountInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Amount"]; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </tbody>
-                <!-- Image Modal -->
-                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="imageModalLabel">Product Image</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="..." class="img-thumbnail mb-3" alt="...">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Edit Product Modal -->
-                <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="editModalLabel">Edit Product</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nameInput2" class="form-label">Name</label>
-                                    <input class="form-control" id="nameInput2" placeholder="Product name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="modelInput2" class="form-label">Model</label>
-                                    <input class="form-control" id="modelInput2" placeholder="Product model">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="formFile2" class="form-label">Image</label>
-                                    <input class="form-control" type="file" accept="image/*" id="formFile2">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="priceInput2" class="form-label">Price</label>
-                                    <input type="number" min="0" class="form-control" id="priceInput2" placeholder="Product price">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="amountInput2" class="form-label">Amount</label>
-                                    <input type="number" min="0" class="form-control" id="amountInput2" placeholder="Amount in stock">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </table>
         </div>
     </div>
