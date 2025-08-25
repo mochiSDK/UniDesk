@@ -44,6 +44,13 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function isVendor($email) {
+        $statement = $this->db->prepare("SELECT IsVendor FROM CUSTOMERS WHERE Email = ?");
+        $statement->bind_param("s", $email);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getCustomerOrderHistory($email) {
         $query = "SELECT p.Picture, p.Name
             FROM ONLINE_ORDERS o

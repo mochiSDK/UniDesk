@@ -38,7 +38,14 @@
                         <i class="bi bi-person-fill"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="customer_profile.php">Profile</a></li>
+                        <?php 
+                        require_once("bootstrap.php");
+                        $templateParams["userType"] = $db_helper->isVendor($_SESSION["user_email"]);
+                        if ($templateParams["userType"]):
+                        ?>
+                            <li><a class="dropdown-item" href="inventory.php">Inventory</a></li>
+                        <?php endif; ?>
                         <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
                     </ul>
                 </li>
