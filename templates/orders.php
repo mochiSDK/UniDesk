@@ -18,14 +18,16 @@
                     <th scope="col" style="width: 10%;">Image</th>
                     <th scope="col">Name</th>
                     <th scope="col" style="width: 10%;">Price</th>
+                    <th scope="col" style="width: 10%;">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($templateParams["orders"] as $order): ?>
+                <?php foreach ($templateParams["orders"] as $order): ?>
                     <tr>
                         <td><img src="<?php echo $order["Picture"] ?>" class="img-thumbnail" alt="Order Picture"></td>
                         <td><?php echo $order["Name"] ?></td>
                         <td><?php echo $order["Price"] ?>€</td>
+                        <td><button type="button" class="btn btn-primary">Ship</button></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
