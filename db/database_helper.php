@@ -82,4 +82,16 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getIncomingOrders() {
+        $query = "SELECT Name, Picture, Price
+            FROM PRODUCTS p
+            JOIN includes i ON p.ProductId = i.ProductId
+            JOIN ONLINE_ORDERS o ON o.OrderId = i.OrderId
+            WHERE o.Status = 'Pending'
+        ";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

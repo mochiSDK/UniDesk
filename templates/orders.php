@@ -21,16 +21,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><img src="..." class="img-thumbnail" alt="..."></td>
-                    <td>Product name</td>
-                    <td>1,99€</td>
-                </tr>
-                <tr>
-                    <td><img src="..." class="img-thumbnail" alt="..."></td>
-                    <td>Product name</td>
-                    <td>12,00€</td>
-                </tr>
+                <?php foreach($templateParams["orders"] as $order): ?>
+                    <tr>
+                        <td><img src="<?php echo $order["Picture"] ?>" class="img-thumbnail" alt="Order Picture"></td>
+                        <td><?php echo $order["Name"] ?></td>
+                        <td><?php echo $order["Price"] ?>€</td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
