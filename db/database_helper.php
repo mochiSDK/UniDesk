@@ -42,6 +42,20 @@ class DatabaseHelper {
         $statement->bind_param("i", $amount);
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
-    } 
+    }
+
+    public function getCustomerOrderHistory($email) {
+        $query = "SELECT p.Picture, p.Name
+            FROM ONLINE_ORDERS o
+            JOIN includes i ON o.OrderId = i.OrderId
+            JOIN PRODUCTS p ON i.ProductId = p.ProductId
+            WHERE o.Email = ?
+            ORDER BY o.PurchaseDate DESC
+        ";
+        $statement = $this->db->prepare($query);
+        $statement->bind_param("s", $email);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 
 }
