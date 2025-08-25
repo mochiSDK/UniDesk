@@ -20,7 +20,7 @@ create table CUSTOMERS (
      Email char(254) not null,
      Username char(254) not null,
      Password char(254) not null,
-     IsVendor char not null,
+     IsVendor boolean not null,
      constraint ID_CUSTOMER_ID primary key (Email));
 
 create table includes (
