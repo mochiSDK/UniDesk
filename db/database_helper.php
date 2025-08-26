@@ -58,7 +58,7 @@ class DatabaseHelper {
         if ($email == "" or $email == null) {
             die("The provided email is empty or null.");
         }
-        $query = "SELECT p.Picture, p.Name
+        $query = "SELECT o.OrderId, p.Picture, p.Name, p.Brand, p.Price, o.PurchaseDate, o.DeliveryDate, o.Status
             FROM ONLINE_ORDERS o
             JOIN includes i ON o.OrderId = i.OrderId
             JOIN PRODUCTS p ON i.ProductId = p.ProductId

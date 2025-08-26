@@ -70,17 +70,27 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col" style="width: 20%;">Product</th>
+              <th scope="col">#</th>
+              <th scope="col" style="width: 15%;">Image</th>
               <th scope="col">Name</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Price</th>
+              <th scope="col">Purchase Date</th>
+              <th scope="col">Delivery Date</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($templateParams["productHistory"] as $product): ?>
               <tr>
-                <td>
-                  <img src="<?php echo $product["Picture"]; ?>" class="img-thumbnail w-50" alt="...">
-                </td>
+                <td><?php echo $product["OrderId"]; ?></td>
+                <td><img src="<?php echo $product["Picture"]; ?>" class="img-thumbnail w-50" alt="..."></td>
                 <td><?php echo $product["Name"]; ?></td>
+                <td><?php echo $product["Brand"]; ?></td>
+                <td><?php echo $product["Price"]; ?>€</td>
+                <td><?php echo $product["PurchaseDate"]; ?></td>
+                <td><?php echo $product["DeliveryDate"]; ?></td>
+                <td><?php echo $product["Status"]; ?></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
