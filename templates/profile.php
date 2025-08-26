@@ -35,10 +35,6 @@
                 <input type="text" class="form-control" id="newUsernameInput" placeholder="username">
                 <label for="newUsernameInput">New username</label>
               </div>
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="newEmailInput" placeholder="name@example.com">
-                <label for="newEmailInput">New email address</label>
-              </div>
               <div class="input-group">
                 <div class="form-floating">
                   <input id="newPasswordInput" type="password" class="form-control" placeholder="Password">
@@ -48,7 +44,7 @@
                 <script>
                   const showButton = document.getElementById("showButton")
                   const showIcon = showButton.querySelector("i")
-                  const password = document.getElementById("floatingPassword")
+                  const password = document.getElementById("newPasswordInput")
                   showButton.addEventListener("click", () => {
                     const isPassword = password.getAttribute("type") === "password"
                     password.setAttribute("type", isPassword ? "text" : "password")
@@ -65,7 +61,7 @@
             <script>
               // Clearing inputs when closing modal.
               document.getElementById("closeBtn").addEventListener("click", () => {
-                ["newUsernameInput", "newEmailInput", "newPasswordInput"].forEach((id) => {
+                ["newUsernameInput", "newPasswordInput"].forEach((id) => {
                   document.getElementById(id).value = ""
                 })
               })
