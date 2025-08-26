@@ -17,8 +17,7 @@ class DatabaseHelper {
     }
 
     public function getBestSellers($amount = 5) {
-        $query = "
-            SELECT
+        $query = "SELECT
                 p.ProductId,
                 p.Name,
                 p.Price,
