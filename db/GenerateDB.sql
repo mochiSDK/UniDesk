@@ -78,7 +78,7 @@ insert into ONLINE_ORDERS
 values ("O0", "mario.rossi@unibo.it", 5.80, "Delivered", '2025-07-01', '2025-07-05'),
        ("O1", "virginia.trevisan@studio.unibo.it", 1.90, "Pending", '2025-07-02', '2025-07-06'),
        ("O2", "fabiola.pisani@studio.unibo.it", 3.40, "Shipped", '2025-07-03', '2025-07-07'),
-       ("O3", "giuseppe.fiorentini@studio.unibo.it", 3.40, "Pending", '2025-08-04', '2025-08-08');
+       ("O3", "giuseppe.fiorentini@studio.unibo.it", 5.80, "Pending", '2025-08-04', '2025-08-08');
 
 insert into includes
 values ("O0", "P0"),
