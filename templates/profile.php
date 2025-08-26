@@ -31,17 +31,17 @@
             </div>
             <div class="modal-body">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput1" placeholder="username">
-                <label for="floatingInput">New username</label>
+                <input type="text" class="form-control" id="newUsernameInput" placeholder="username">
+                <label for="newUsernameInput">New username</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput2" placeholder="name@example.com">
-                <label for="floatingInput">New email address</label>
+                <input type="email" class="form-control" id="newEmailInput" placeholder="name@example.com">
+                <label for="newEmailInput">New email address</label>
               </div>
               <div class="input-group">
                 <div class="form-floating">
-                  <input id="floatingPassword" type="password" class="form-control" placeholder="Password">
-                  <label for="floatingPassword">New password</label>
+                  <input id="newPasswordInput" type="password" class="form-control" placeholder="Password">
+                  <label for="newPasswordInput">New password</label>
                 </div>
                 <button id="showButton" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-fill"></i></button>
                 <script>
@@ -58,9 +58,17 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button id="closeBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary">Save changes</button>
             </div>
+            <script>
+              // Clearing inputs when closing modal.
+              document.getElementById("closeBtn").addEventListener("click", () => {
+                ["newUsernameInput", "newEmailInput", "newPasswordInput"].forEach((id) => {
+                  document.getElementById(id).value = ""
+                })
+              })
+            </script>
           </div>
         </div>
       </div>
