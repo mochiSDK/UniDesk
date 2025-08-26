@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <?php require_once "navbar.php"; ?>
+  <?php require_once "navbar_controller.php"; ?>
   <div class="container-fluid">
     <div class="row">
       <!-- Profile Card -->
@@ -75,7 +75,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($templateParams["productHistory"] as $product): ?>
+            <?php foreach ($templateParams["productHistory"] as $product): ?>
               <tr>
                 <td>
                   <img src="<?php echo $product["Picture"]; ?>" class="img-thumbnail w-50" alt="...">

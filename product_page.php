@@ -44,9 +44,7 @@ $conn->close();
 </head>
 <body>
 
-<?php 
-require_once 'navbar.php'; 
-?>
+<?php require_once "navbar_controller.php"; ?>
 
 <div class="container my-5">
     <!-- Card Product Details -->

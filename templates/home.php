@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php require_once "navbar.php"; ?>
+    <?php require_once "navbar_controller.php"; ?>
     <div class="container text-start">
         <div class="row flex-nowrap overflow-auto">
             <?php foreach ($templateParams["categories"] as $category): ?>

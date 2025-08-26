@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php require_once "navbar.php"; ?>
+    <?php require_once "navbar_controller.php"; ?>
     <div class="container mt-2">
         <div class="row">
             <h1>Inventory</h1>

@@ -45,13 +45,20 @@ class DatabaseHelper {
     }
 
     public function isVendor($email) {
+        if ($email == "" or $email == null) {
+            die("The provided email is empty or null.");
+        }
         $statement = $this->db->prepare("SELECT IsVendor FROM CUSTOMERS WHERE Email = ?");
         $statement->bind_param("s", $email);
         $statement->execute();
-        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $statement->get_result()->fetch_assoc();
+        return $result ? (bool)$result["IsVendor"] : false;
     }
 
     public function getCustomerOrderHistory($email) {
+        if ($email == "" or $email == null) {
+            die("The provided email is empty or null.");
+        }
         $query = "SELECT p.Picture, p.Name
             FROM ONLINE_ORDERS o
             JOIN includes i ON o.OrderId = i.OrderId

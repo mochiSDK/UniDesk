@@ -39,12 +39,9 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="customer_profile.php">Profile</a></li>
-                        <?php 
-                        require_once("bootstrap.php");
-                        $templateParams["userType"] = $db_helper->isVendor($_SESSION["user_email"]);
-                        if ($templateParams["userType"]):
-                        ?>
+                        <?php if ($templateParams["userType"]): ?>
                             <li><a class="dropdown-item" href="inventory.php">Inventory</a></li>
+                            <li><a class="dropdown-item" href="incoming_orders.php">Orders</a></li>
                         <?php endif; ?>
                         <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
                     </ul>

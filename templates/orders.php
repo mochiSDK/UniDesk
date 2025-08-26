@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php require_once "navbar.php"; ?>
+    <?php require_once "navbar_controller.php"; ?>
     <div class="container-fluid mt-2">
         <h1>Incoming Orders</h1>
         <table class="table">
