@@ -88,14 +88,27 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getIncomingOrders() {
-        $query = "SELECT Name, Picture, Price
+    public function getIncomingOrdersIdsDatesTotal() {
+        $query = "SELECT DISTINCT o.OrderId, o.PurchaseDate, o.DeliveryDate, o.Total
+            FROM includes i
+            LEFT JOIN ONLINE_ORDERS o ON o.OrderId = i.OrderId
+            WHERE Status = 'Pending'
+        ";
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getOrderDetails($id) {
+        $query = "SELECT Name, Brand, Price
             FROM PRODUCTS p
             JOIN includes i ON p.ProductId = i.ProductId
             JOIN ONLINE_ORDERS o ON o.OrderId = i.OrderId
             WHERE o.Status = 'Pending'
+            AND o.OrderId = ?
         ";
         $statement = $this->db->prepare($query);
+        $statement->bind_param("s", $id);
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }

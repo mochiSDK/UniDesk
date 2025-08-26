@@ -15,19 +15,42 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col" style="width: 10%;">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col" style="width: 10%;">Price</th>
-                    <th scope="col" style="width: 10%;">Action</th>
+                    <th scope="col" style="width: 10%;">#</th>
+                    <th scope="col">Purchase Date</th>
+                    <th scope="col">Delivery Date</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Order</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($templateParams["orders"] as $order): ?>
+                <?php foreach ($templateParams["ordersIdsDatesTotal"] as $order): ?>
                     <tr>
-                        <td><img src="<?php echo $order["Picture"] ?>" class="img-thumbnail" alt="Order Picture"></td>
-                        <td><?php echo $order["Name"] ?></td>
-                        <td><?php echo $order["Price"] ?>€</td>
+                        <td><?php echo $order["OrderId"] ?></td>
+                        <td><?php echo $order["PurchaseDate"] ?></td>
+                        <td><?php echo $order["DeliveryDate"] ?></td>
+                        <td><?php echo $order["Total"] ?>€</td>
                         <td><button type="button" class="btn btn-primary">Ship</button></td>
+                        <td>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 50%;">Name</th>
+                                        <th scope="col">Brand</th>
+                                        <th scope="col">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($templateParams["orderDetails"][$order["OrderId"]] as $orderDetail): ?>
+                                        <tr>
+                                            <td><?php echo $orderDetail["Name"] ?></td>
+                                            <td><?php echo $orderDetail["Brand"] ?></td>
+                                            <td><?php echo $orderDetail["Price"] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
