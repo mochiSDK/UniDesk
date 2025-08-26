@@ -16,7 +16,8 @@
       <div class="col-auto">
         <div class="card text-center my-3" style="width: 18rem;">
           <div class="card-body">
-            <h5 class="card-title"><?php echo $_SESSION["username"] ?></h5>
+            <h5 class="card-title"><?php echo $_SESSION["username"]; ?></h5>
+            <p class="card-text"><?php echo $_SESSION["user_email"]; ?></p>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
           </div>
         </div>
