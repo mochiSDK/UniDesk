@@ -123,4 +123,11 @@ class DatabaseHelper {
         return $statement->affected_rows == 1;
     }
 
+    public function shipOrder($orderId) {
+        // TODO: handle cart correctly too.
+        $statement = $this->db->prepare("UPDATE ONLINE_ORDERS SET Status = 'Shipped' WHERE OrderId = ?");
+        $statement->bind_param("s", $orderId);
+        return $statement->execute();
+    }
+
 }
