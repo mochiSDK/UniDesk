@@ -1,6 +1,6 @@
 insert into CUSTOMERS
 values ("mario.rossi@unibo.it", "mario.rossi", "Z123", true),
-	   ("virginia.trevisan@studio.unibo.it", "virginia.trevisan", "A123", false),
+	("virginia.trevisan@studio.unibo.it", "virginia.trevisan", "A123", false),
        ("fabiola.pisani@studio.unibo.it", "fabiola.pisani", "B123", false),
        ("giuseppe.fiorentini@studio.unibo.it", "giuseppe.fiorentini", "C123", false),
        ("valentino.russo@studio.unibo.it", "valentino.russo", "D123", false),
@@ -77,11 +77,15 @@ values ("C0", "P0"),
 insert into ONLINE_ORDERS
 values ("O0", "mario.rossi@unibo.it", 5.80, "Delivered", '2025-07-01', '2025-07-05'),
        ("O1", "virginia.trevisan@studio.unibo.it", 1.90, "Pending", '2025-07-02', '2025-07-06'),
-       ("O2", "fabiola.pisani@studio.unibo.it", 3.40, "Shipped", '2025-07-03', '2025-07-07');
+       ("O2", "fabiola.pisani@studio.unibo.it", 3.40, "Shipped", '2025-07-03', '2025-07-07'),
+       ("O3", "giuseppe.fiorentini@studio.unibo.it", 3.40, "Pending", '2025-08-04', '2025-08-08');
 
 insert into includes
 values ("O0", "P0"),
        ("O0", "P1"),
+       ("O1", "P0"),
        ("O1", "P2"),
        ("O2", "P3"),
-       ("O2", "P4");
+       ("O2", "P4"),
+       ("O3", "P0"),
+       ("O3", "P1");
