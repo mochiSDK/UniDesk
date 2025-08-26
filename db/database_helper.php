@@ -113,4 +113,14 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function updateUserCredentials($newUsername, $newPassword, $email) {
+        if ($newUsername == "" or $newPassword == "" or $email == "") {
+            die("Credentials update aborted.");
+        }
+        $statement = $this->db->prepare("UPDATE CUSTOMERS SET Username = ?, Password = ? WHERE Email = ?");
+        $statement->bind_param("sss", $newUsername, $newPassword, $email);
+        $statement->execute();
+        return $statement->affected_rows == 1;
+    }
+
 }

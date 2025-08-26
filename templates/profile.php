@@ -30,34 +30,36 @@
               <h1 class="modal-title fs-5" id="exampleModalLabel">Change credentials</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="newUsernameInput" placeholder="username">
-                <label for="newUsernameInput">New username</label>
-              </div>
-              <div class="input-group">
-                <div class="form-floating">
-                  <input id="newPasswordInput" type="password" class="form-control" placeholder="Password">
-                  <label for="newPasswordInput">New password</label>
+            <form method="post" action="handlers/update_user.php">
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input type="text" name="username" class="form-control" id="newUsernameInput" placeholder="username">
+                  <label for="newUsernameInput">New username</label>
                 </div>
-                <button id="showButton" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-fill"></i></button>
-                <script>
-                  const showButton = document.getElementById("showButton")
-                  const showIcon = showButton.querySelector("i")
-                  const password = document.getElementById("newPasswordInput")
-                  showButton.addEventListener("click", () => {
-                    const isPassword = password.getAttribute("type") === "password"
-                    password.setAttribute("type", isPassword ? "text" : "password")
-                    showIcon.classList.toggle("bi-eye-fill", !isPassword)
-                    showIcon.classList.toggle("bi-eye-slash-fill", isPassword)
-                  })
-                </script>
+                <div class="input-group">
+                  <div class="form-floating">
+                    <input id="newPasswordInput" type="password" name="password" class="form-control" placeholder="Password">
+                    <label for="newPasswordInput">New password</label>
+                  </div>
+                  <button id="showButton" class="btn btn-outline-secondary" type="button"><i class="bi bi-eye-fill"></i></button>
+                  <script>
+                    const showButton = document.getElementById("showButton")
+                    const showIcon = showButton.querySelector("i")
+                    const password = document.getElementById("newPasswordInput")
+                    showButton.addEventListener("click", () => {
+                      const isPassword = password.getAttribute("type") === "password"
+                      password.setAttribute("type", isPassword ? "text" : "password")
+                      showIcon.classList.toggle("bi-eye-fill", !isPassword)
+                      showIcon.classList.toggle("bi-eye-slash-fill", isPassword)
+                    })
+                  </script>
+                </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button id="closeBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+              <div class="modal-footer">
+                <button id="closeBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="saveBtn" type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
             <script>
               // Clearing inputs when closing modal.
               document.getElementById("closeBtn").addEventListener("click", () => {
