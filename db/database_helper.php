@@ -138,4 +138,57 @@ class DatabaseHelper {
         return $statement->execute();
     }
 
+    public function editProduct(
+        $productId,
+        $newName,
+        $newBrand,
+        $newModel,
+        $newDescription,
+        $newImage,
+        $newPrice,
+        $newAmount,
+        $newCategoryId,
+        $newLength,
+        $newHeight,
+        $newWidth
+    ) {
+        $query = "UPDATE PRODUCTS
+            SET Name = ?, 
+                Brand = ?, 
+                Description = ?, 
+                Picture = ?, 
+                Price = ?, 
+                Amount = ?, 
+                CategoryId = ?, 
+                Length = ?, 
+                Height = ?, 
+                Width = ?
+            WHERE ProductId = ?";
+        $statement = $this->db->prepare($query);
+        $statement->bind_param(
+            "ssssdissdds",
+            $newName,
+            $newBrand,
+            $newDescription,
+            $newImage,
+            $newPrice,
+            $newAmount,
+            $newCategoryId,
+            $newLength,
+            $newHeight,
+            $newWidth,
+            $productId
+        );
+        $res1 = $statement->execute();
+
+        // Update or insert model.
+        $queryModel = "INSERT INTO PRODUCT_MODELS (Name, ProductId)
+                VALUES (?, ?)
+                ON DUPLICATE KEY UPDATE Name = VALUES(Name)";
+
+        $statementModel = $this->db->prepare($queryModel);
+        $statementModel->bind_param("ss", $newModel, $productId);
+        $res2 = $statementModel->execute();
+        return $res1 and $res2;
+    }
 }
