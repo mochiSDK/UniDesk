@@ -108,32 +108,34 @@
                                         <h1 class="modal-title fs-5" id="editModalLabel<?php echo $product["ProductId"]; ?>">Edit Product</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="nameInput<?php echo $product["ProductId"]; ?>" class="form-label">Name</label>
-                                            <input class="form-control" id="nameInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Name"]; ?>">
+                                    <form method="post" action="handlers/edit_product.php">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="nameInput<?php echo $product["ProductId"]; ?>" class="form-label">Name</label>
+                                                <input name="productName" class="form-control" id="nameInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Name"]; ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="modelInput<?php echo $product["ProductId"]; ?>" class="form-label">Model</label>
+                                                <input name="productModel" class="form-control" id="modelInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Model"]; ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="formFile<?php echo $product["ProductId"]; ?>" class="form-label">Image</label>
+                                                <input name="productImage" class="form-control" type="file" accept="image/*" id="formFile<?php echo $product["ProductId"]; ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="priceInput<?php echo $product["ProductId"]; ?>" class="form-label">Price</label>
+                                                <input name="productPrice" type="number" min="0" class="form-control" id="priceInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Price"]; ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="amountInput<?php echo $product["ProductId"]; ?>" class="form-label">Amount</label>
+                                                <input name="productAmount" type="number" min="0" class="form-control" id="amountInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Amount"]; ?>">
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="modelInput<?php echo $product["ProductId"]; ?>" class="form-label">Model</label>
-                                            <input class="form-control" id="modelInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Model"]; ?>">
+                                        <div class="modal-footer">
+                                            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="formFile<?php echo $product["ProductId"]; ?>" class="form-label">Image</label>
-                                            <input class="form-control" type="file" accept="image/*" id="formFile<?php echo $product["ProductId"]; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="priceInput<?php echo $product["ProductId"]; ?>" class="form-label">Price</label>
-                                            <input type="number" min="0" class="form-control" id="priceInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Price"]; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="amountInput<?php echo $product["ProductId"]; ?>" class="form-label">Amount</label>
-                                            <input type="number" min="0" class="form-control" id="amountInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Amount"]; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
