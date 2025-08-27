@@ -75,11 +75,14 @@ class DatabaseHelper {
         $query = "SELECT
                 p.ProductId,
                 p.Name,
+                p.Brand,
                 m.Name AS Model,
-                Picture,
+                c.Name AS Category,
+                p.Picture,
                 Price,
                 Amount
             FROM PRODUCTS p
+            JOIN PRODUCT_CATEGORIES c ON p.CategoryId = c.CategoryId
             LEFT JOIN PRODUCT_MODELS m ON p.ProductId = m.ProductId
             ORDER BY p.Name
         ";

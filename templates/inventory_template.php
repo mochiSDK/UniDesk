@@ -65,10 +65,12 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Brand</th>
                         <th scope="col">Model</th>
                         <th scope="col">Image</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Amount</th>
+                        <th scope="col">In-stock</th>
+                        <th scope="col">Category</th>
                         <th scope="col" style="width: 10%;">Edit</th>
                     </tr>
                 </thead>
@@ -77,10 +79,12 @@
                         <tr>
                             <th scope="row"><?php echo $product["ProductId"]; ?></th>
                             <td><?php echo $product["Name"]; ?></td>
+                            <td><?php echo $product["Brand"]; ?></td>
                             <td><?php echo $product["Model"]; ?></td>
                             <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal<?php echo $product["ProductId"]; ?>"><i class="bi bi-eye-fill"></i></button></td>
                             <td><?php echo $product["Price"]; ?>€</td>
                             <td><?php echo $product["Amount"]; ?></td>
+                            <td><?php echo $product["Category"]; ?></td>
                             <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editProductModal<?php echo $product["ProductId"]; ?>"><i class="bi bi-pencil-square"></i></button></td>
                         </tr>
                         <!-- Image Modal -->
