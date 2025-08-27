@@ -20,7 +20,7 @@ create table CUSTOMERS (
      Email char(254) not null,
      Username char(254) not null,
      Password char(254) not null,
-     IsVendor char not null,
+     IsVendor boolean not null,
      constraint ID_CUSTOMER_ID primary key (Email));
 
 create table includes (
@@ -31,7 +31,7 @@ create table includes (
 create table ONLINE_ORDERS (
      OrderId char(254) not null,
      Email char(254) not null,
-     Total decimal(4,2) not null,
+     Total decimal(5,2) not null,
      Status char(254) not null,
      PurchaseDate date not null,
      DeliveryDate date not null,
@@ -43,12 +43,12 @@ create table PRODUCTS (
      CategoryId char(254) not null,
      Name char(254) not null,
      Brand char(254) not null,
-     Price decimal(3,2) not null,
+     Price decimal(5,2) not null,
      Amount int not null,
      Description varchar(500),
-     Length decimal(2,2),
-     Height decimal(2,2),
-     Width decimal(2,2),
+     Length decimal(5,2),
+     Height decimal(5,2),
+     Width decimal(5,2),
      Picture char(254),
      constraint ID_PRODUCT_ID primary key (ProductId),
      constraint SID_PRODUCT_ID unique (CategoryId, ProductId));
@@ -56,6 +56,7 @@ create table PRODUCTS (
 create table PRODUCT_CATEGORIES (
      CategoryId char(254) not null,
      Name char(254) not null,
+     Picture char(254),
      constraint ID_PRODUCT_CATEGORY_ID primary key (CategoryId));
 
 create table PRODUCT_MODELS (
