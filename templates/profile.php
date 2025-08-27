@@ -56,18 +56,10 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button id="closeBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="closeBtn" type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button id="saveBtn" type="submit" class="btn btn-primary">Save changes</button>
               </div>
             </form>
-            <script>
-              // Clearing inputs when closing modal.
-              document.getElementById("closeBtn").addEventListener("click", () => {
-                ["newUsernameInput", "newPasswordInput"].forEach((id) => {
-                  document.getElementById(id).value = ""
-                })
-              })
-            </script>
           </div>
         </div>
       </div>
