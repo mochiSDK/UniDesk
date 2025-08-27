@@ -74,13 +74,18 @@ class DatabaseHelper {
     public function getInventory() {
         $query = "SELECT
                 p.ProductId,
+                c.CategoryId,
                 p.Name,
                 p.Brand,
+                p.Description,
                 m.Name AS Model,
                 c.Name AS Category,
                 p.Picture,
                 Price,
-                Amount
+                Amount,
+                Length,
+                Height,
+                Width
             FROM PRODUCTS p
             JOIN PRODUCT_CATEGORIES c ON p.CategoryId = c.CategoryId
             LEFT JOIN PRODUCT_MODELS m ON p.ProductId = m.ProductId

@@ -119,8 +119,16 @@
                                                 <input name="productName" class="form-control" id="nameInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Name"]; ?>">
                                             </div>
                                             <div class="mb-3">
+                                                <label for="brandInput<?php echo $product["ProductId"]; ?>" class="form-label">Brand</label>
+                                                <input name="productBrand" class="form-control" id="brandInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Brand"]; ?>">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="modelInput<?php echo $product["ProductId"]; ?>" class="form-label">Model</label>
                                                 <input name="productModel" class="form-control" id="modelInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Model"]; ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="descriptionInput<?php echo $product["ProductId"]; ?>" class="form-label">Description</label>
+                                                <textarea name="productDescription" rows="3" class="form-control" id="descriptionInput<?php echo $product["ProductId"]; ?>"><?php echo $product["Description"]; ?></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="formFile<?php echo $product["ProductId"]; ?>" class="form-label">Image</label>
@@ -133,6 +141,34 @@
                                             <div class="mb-3">
                                                 <label for="amountInput<?php echo $product["ProductId"]; ?>" class="form-label">Amount</label>
                                                 <input name="productAmount" type="number" min="0" class="form-control" id="amountInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Amount"]; ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="categoryInput<?php echo $product["ProductId"]; ?>" class="form-label">Category</label>
+                                                <select name="productCategory" class="form-select" aria-label="Category select">
+                                                    <?php foreach ($templateParams["categories"] as $category): ?>
+                                                        <option
+                                                            value="<?php echo $category["CategoryId"]; ?>"
+                                                            <?php if ($product["CategoryId"] == $category["CategoryId"]): ?> selected <?php endif; ?>>
+                                                            <?php echo $category["Name"]; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lengthInput<?php echo $product["ProductId"]; ?>" class="form-label">Length</label>
+                                                        <input type="number" min="0" id="lengthInput<?php echo $product["ProductId"]; ?>" name="productLength" class="form-control" value="<?php echo $product["Length"]; ?>" aria-label=" Product length input">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="heightInput<?php echo $product["ProductId"]; ?>" class="form-label">Height</label>
+                                                        <input type="number" min="0" id="heightInput<?php echo $product["ProductId"]; ?>" name="productHeight" class="form-control" value="<?php echo $product["Height"]; ?>" aria-label=" Product height input">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="widthInput<?php echo $product["ProductId"]; ?>" class="form-label">Width</label>
+                                                        <input type="number" min="0" id="widthInput<?php echo $product["ProductId"]; ?>" name="productWidth" class="form-control" value="<?php echo $product["Width"]; ?>" aria-label=" Product width input">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
