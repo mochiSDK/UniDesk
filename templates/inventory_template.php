@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="priceInput" class="form-label">Price</label>
-                                        <input name="productPrice" type="number" min="0" class="form-control" id="priceInput" required>
+                                        <input name="productPrice" type="number" step="0.01" min="0" class="form-control" id="priceInput" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="amountInput" class="form-label">Amount</label>
@@ -71,15 +71,15 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="lengthInput" class="form-label">Length</label>
-                                                <input type="number" min="0" id="lengthInput" name="productLength" class="form-control">
+                                                <input type="number" step="0.01" min="0" id="lengthInput" name="productLength" class="form-control">
                                             </div>
                                             <div class="col">
                                                 <label for="heightInput" class="form-label">Height</label>
-                                                <input type="number" min="0" id="heightInput" name="productHeight" class="form-control">
+                                                <input type="number" step="0.01" min="0" id="heightInput" name="productHeight" class="form-control">
                                             </div>
                                             <div class="col">
                                                 <label for="widthInput" class="form-label">Width</label>
-                                                <input type="number" min="0" id="widthInput" name="productWidth" class="form-control">
+                                                <input type="number" step="0.01" min="0" id="widthInput" name="productWidth" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +147,7 @@
                                         <h1 class="modal-title fs-5" id="editModalLabel<?php echo $product["ProductId"]; ?>">Edit Product</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form method="post" action="handlers/edit_product.php">
+                                    <form method="post" action="handlers/edit_product.php?productId=<?php echo $product["ProductId"]; ?>">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label for="nameInput<?php echo $product["ProductId"]; ?>" class="form-label">Name</label>
@@ -171,7 +171,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="priceInput<?php echo $product["ProductId"]; ?>" class="form-label">Price</label>
-                                                <input name="productPrice" type="number" min="0" class="form-control" id="priceInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Price"]; ?>">
+                                                <input name="productPrice" type="number" step="0.01" min="0" class="form-control" id="priceInput<?php echo $product["ProductId"]; ?>" value="<?php echo $product["Price"]; ?>">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="amountInput<?php echo $product["ProductId"]; ?>" class="form-label">Amount</label>
@@ -193,15 +193,15 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="lengthInput<?php echo $product["ProductId"]; ?>" class="form-label">Length</label>
-                                                        <input type="number" min="0" id="lengthInput<?php echo $product["ProductId"]; ?>" name="productLength" class="form-control" value="<?php echo $product["Length"]; ?>" aria-label=" Product length input">
+                                                        <input type="number" step="0.01" min="0" id="lengthInput<?php echo $product["ProductId"]; ?>" name="productLength" class="form-control" value="<?php echo $product["Length"]; ?>" aria-label=" Product length input">
                                                     </div>
                                                     <div class="col">
                                                         <label for="heightInput<?php echo $product["ProductId"]; ?>" class="form-label">Height</label>
-                                                        <input type="number" min="0" id="heightInput<?php echo $product["ProductId"]; ?>" name="productHeight" class="form-control" value="<?php echo $product["Height"]; ?>" aria-label=" Product height input">
+                                                        <input type="number" step="0.01" min="0" id="heightInput<?php echo $product["ProductId"]; ?>" name="productHeight" class="form-control" value="<?php echo $product["Height"]; ?>" aria-label=" Product height input">
                                                     </div>
                                                     <div class="col">
                                                         <label for="widthInput<?php echo $product["ProductId"]; ?>" class="form-label">Width</label>
-                                                        <input type="number" min="0" id="widthInput<?php echo $product["ProductId"]; ?>" name="productWidth" class="form-control" value="<?php echo $product["Width"]; ?>" aria-label=" Product width input">
+                                                        <input type="number" step="0.01" min="0" id="widthInput<?php echo $product["ProductId"]; ?>" name="productWidth" class="form-control" value="<?php echo $product["Width"]; ?>" aria-label=" Product width input">
                                                     </div>
                                                 </div>
                                             </div>
