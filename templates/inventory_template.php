@@ -28,32 +28,67 @@
                                 <h1 class="modal-title fs-5" id="addProductModalLabel">Add Product</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nameInput" class="form-label">Name</label>
-                                    <input class="form-control" id="nameInput" placeholder="Product name">
+                            <form method="post" action="handlers/add_product.php">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="nameInput" class="form-label">Name</label>
+                                        <input name="productName" class="form-control" id="nameInput" placeholder="Product name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="brandInput" class="form-label">Brand</label>
+                                        <input name="productBrand" class="form-control" id="brandInput" placeholder="Product brand" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="modelInput" class="form-label">Model</label>
+                                        <input name="productModel" class="form-control" id="modelInput" placeholder="Product model" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descriptionInput" class="form-label">Description</label>
+                                        <textarea name="productDescription" rows="3" class="form-control" id="descriptionInput" placeholder="Product description"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Image</label>
+                                        <input name="productImage" class="form-control" type="file" accept="image/*" id="formFile">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="priceInput" class="form-label">Price</label>
+                                        <input name="productPrice" type="number" min="0" class="form-control" id="priceInput" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="amountInput" class="form-label">Amount</label>
+                                        <input name="productAmount" type="number" min="0" class="form-control" id="amountInput" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="categoryInput" class="form-label">Category</label>
+                                        <select name="productCategory" class="form-select" aria-label="Category select" required>
+                                            <option value="" selected disabled>Choose a category</option>
+                                            <?php foreach ($templateParams["categories"] as $category): ?>
+                                                <option value="<?php echo $category["CategoryId"]; ?>"><?php echo $category["Name"]; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="lengthInput" class="form-label">Length</label>
+                                                <input type="number" min="0" id="lengthInput" name="productLength" class="form-control">
+                                            </div>
+                                            <div class="col">
+                                                <label for="heightInput" class="form-label">Height</label>
+                                                <input type="number" min="0" id="heightInput" name="productHeight" class="form-control">
+                                            </div>
+                                            <div class="col">
+                                                <label for="widthInput" class="form-label">Width</label>
+                                                <input type="number" min="0" id="widthInput" name="productWidth" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="modelInput" class="form-label">Model</label>
-                                    <input class="form-control" id="modelInput" placeholder="Product model">
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" accept="image/*" id="formFile">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="priceInput" class="form-label">Price</label>
-                                    <input type="number" min="0" class="form-control" id="priceInput" placeholder="Product price">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="amountInput" class="form-label">Amount</label>
-                                    <input type="number" min="0" class="form-control" id="amountInput" placeholder="Amount in stock">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
