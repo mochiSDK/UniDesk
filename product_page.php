@@ -1,14 +1,15 @@
 <?php
+session_start(); 
 require_once 'includes/db_config.php';
 
-// 1. Get product ID from URL
+// 1. ID product from URL
 if (isset($_GET['ProductId']) && !empty($_GET['ProductId'])) {
     $product_id = $_GET['ProductId'];
 } else {
-    die("ERRORE: ID del prodotto non specificato.");
+    die("ERROR: ID product not found.");
 }
 
-// 2. Query to get Products info
+// 2. query to get info
 $sql = "SELECT * FROM PRODUCTS WHERE ProductId = ?";
 
 if ($stmt = $conn->prepare($sql)) {
@@ -18,10 +19,10 @@ if ($stmt = $conn->prepare($sql)) {
         if ($result->num_rows == 1) {
             $product = $result->fetch_assoc();
         } else {
-            die("ERRORE: Prodotto non trovato.");
+            die("ERROR: Product not found.");
         }
     } else {
-        echo "Oops! Qualcosa è andato storto.";
+        echo "Oops! something wrong.";
     }
     $stmt->close();
 }
@@ -39,7 +40,7 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     
-    <!-- Stylesheet link -->
+    <!-- Stylesheet Link -->
     <link href="assets/product_style.css" rel="stylesheet">
 </head>
 <body>
@@ -63,27 +64,37 @@ require_once 'navbar.php';
                 
                 <ul class="details-list">
                     <li><strong>Brand:</strong> <?php echo htmlspecialchars($product['Brand']); ?></li>
-                    <li><strong>Dimensioni:</strong> <?php echo htmlspecialchars($product['Length']); ?>L x <?php echo htmlspecialchars($product['Width']); ?>W x <?php echo htmlspecialchars($product['Height']); ?>H cm</li>
+                    <li><strong>Size:</strong> <?php echo htmlspecialchars($product['Length']); ?> x <?php echo htmlspecialchars($product['Height']); ?> cm</li>
                 </ul>
 
                 <div class="mt-4">
                     <p><?php echo nl2br(htmlspecialchars($product['Description'])); ?></p>
                 </div>
-                <div class="d-grid gap-2 mt-4 action-buttons-container">
-                    <div class="input-group quantity-selector">
-                        <button class="btn btn-outline-secondary" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="1">
-                        <button class="btn btn-outline-secondary" type="button">+</button>
+
+                <form action="handlers/add_to_cart_handler.php" method="POST">
+                    <input type="hidden" name="ProductId" value="<?php echo htmlspecialchars($product['ProductId']); ?>">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <!-- Buttons -->
+                    <div class="d-grid gap-2 mt-4 action-buttons-container">
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cart-plus"></i> Add to cart</button>
+                        <button type="button" class="btn btn-compare"><i class="bi bi-arrow-left-right"></i> Compare</button>
                     </div>
-                    <button class="btn btn-primary btn-lg"><i class="bi bi-cart-plus"></i> Add to cart</button>
-                    <button class="btn btn-wishlist"><i class="bi bi-heart"></i> Wishlist</button>
-                    <button class="btn btn-compare"><i class="bi bi-arrow-left-right"></i> Compare</button>
-                </div>
+                </form>
+                <!-- End of form -->
+
+                <?php
+                if (isset($_SESSION['success_message'])) {
+                    echo '<div class="alert alert-success mt-3" role="alert">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+                    unset($_SESSION['success_message']);
+                }
+                ?>
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
