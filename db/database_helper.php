@@ -93,6 +93,7 @@ class DatabaseHelper {
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+    
 
     public function getBestSellers($amount = 5) {
         $query = "SELECT
