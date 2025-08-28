@@ -18,7 +18,9 @@
             <div class="col">
                 <div class="input-group ms-auto" style="max-width: 25%;">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon" data-bs-toggle="modal" data-bs-target="#addProductModal"><i class="bi bi-plus-circle-fill"></i></button>
-                    <input type="text" class="form-control" placeholder="Search product" aria-label="Search" aria-describedby="button-addon">
+                    <form method="get" action="inventory.php">
+                        <input name="query" type="text" class="form-control" placeholder="Search product" aria-label="Search" aria-describedby="button-addon">
+                    </form>
                 </div>
                 <!-- Add Product Modal -->
                 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">

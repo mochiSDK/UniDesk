@@ -71,7 +71,7 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getInventory() {
+    public function getInventory($search = "") {
         $query = "SELECT
                 p.ProductId,
                 c.CategoryId,
@@ -89,9 +89,16 @@ class DatabaseHelper {
             FROM PRODUCTS p
             JOIN PRODUCT_CATEGORIES c ON p.CategoryId = c.CategoryId
             LEFT JOIN PRODUCT_MODELS m ON p.ProductId = m.ProductId
-            ORDER BY p.Name
         ";
+        if (!empty($search)) {
+            $query .= " WHERE p.Name LIKE ?";
+        }
+        $query .= " ORDER BY p.Name";
         $statement = $this->db->prepare($query);
+        if (!empty($search)) {
+            $param = "%" . $search . "%";
+            $statement->bind_param("s", $param);
+        }
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
@@ -201,4 +208,5 @@ class DatabaseHelper {
         $res2 = $statementModel->execute();
         return $res1 and $res2;
     }
+
 }
