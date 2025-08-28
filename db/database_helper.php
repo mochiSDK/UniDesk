@@ -241,20 +241,25 @@ class DatabaseHelper {
         ";
         $statement = $this->db->prepare($query);
         $productId = uniqid("P-");
-        $params = [
+        $descVar   = $description ?: null;
+        $lengthVar = $length ?: null;
+        $heightVar = $height ?: null;
+        $widthVar  = $width ?: null;
+        $imageVar  = $image ?: null;
+        $statement->bind_param(
+            "ssssdisddds",
             $productId,
             $categoryId,
             $name,
             $brand,
             $price,
             $amount,
-            empty($description) ? null : $description,
-            empty($length) ? null : $length,
-            empty($height) ? null : $height,
-            empty($width) ? null : $width,
-            empty($image) ? null : $image
-        ];
-        $statement->bind_param("ssssdisddds", ...$params);
+            $descVar,
+            $lengthVar,
+            $heightVar,
+            $widthVar,
+            $imageVar
+        );
         $res = $statement->execute();
 
         if (!empty($model)) {
