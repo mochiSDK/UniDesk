@@ -1,7 +1,7 @@
 <?php
 require_once("bootstrap.php");
 
-$templateParams["inventory"] = $db_helper->getInventory();
+$templateParams["inventory"] = $db_helper->getInventory($_GET["query"] ?? "");
 $templateParams["categories"] = $db_helper->getCategories();
 
 require("templates/inventory_template.php");
