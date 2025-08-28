@@ -18,7 +18,9 @@
             <div class="col">
                 <div class="input-group ms-auto" style="max-width: 25%;">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon" data-bs-toggle="modal" data-bs-target="#addProductModal"><i class="bi bi-plus-circle-fill"></i></button>
-                    <input type="text" class="form-control" placeholder="Search product" aria-label="Search" aria-describedby="button-addon">
+                    <form method="get" action="inventory.php">
+                        <input name="query" type="text" class="form-control" placeholder="Search product" aria-label="Search" aria-describedby="button-addon">
+                    </form>
                 </div>
                 <!-- Add Product Modal -->
                 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
@@ -28,7 +30,7 @@
                                 <h1 class="modal-title fs-5" id="addProductModalLabel">Add Product</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form method="post" action="handlers/add_product.php">
+                            <form method="post" action="handlers/add_edit_product.php?productId=<?php echo $product["ProductId"]; ?>&mode=add">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="nameInput" class="form-label">Name</label>
@@ -147,7 +149,7 @@
                                         <h1 class="modal-title fs-5" id="editModalLabel<?php echo $product["ProductId"]; ?>">Edit Product</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form method="post" action="handlers/edit_product.php?productId=<?php echo $product["ProductId"]; ?>">
+                                    <form method="post" action="handlers/add_edit_product.php?productId=<?php echo $product["ProductId"]; ?>&mode=edit" enctype="multipart/form-data">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label for="nameInput<?php echo $product["ProductId"]; ?>" class="form-label">Name</label>

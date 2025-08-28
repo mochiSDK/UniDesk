@@ -150,7 +150,7 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getInventory() {
+    public function getInventory($search = "") {
         $query = "SELECT
                 p.ProductId,
                 c.CategoryId,
@@ -168,9 +168,16 @@ class DatabaseHelper {
             FROM PRODUCTS p
             JOIN PRODUCT_CATEGORIES c ON p.CategoryId = c.CategoryId
             LEFT JOIN PRODUCT_MODELS m ON p.ProductId = m.ProductId
-            ORDER BY p.Name
         ";
+        if (!empty($search)) {
+            $query .= " WHERE p.Name LIKE ?";
+        }
+        $query .= " ORDER BY p.Name";
         $statement = $this->db->prepare($query);
+        if (!empty($search)) {
+            $param = "%" . $search . "%";
+            $statement->bind_param("s", $param);
+        }
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
@@ -217,6 +224,48 @@ class DatabaseHelper {
         return $statement->execute();
     }
 
+    public function addProduct(
+        $name,
+        $brand,
+        $model,
+        $description,
+        $image,
+        $price,
+        $amount,
+        $categoryId,
+        $length,
+        $height,
+        $width
+    ) {
+        $query = "INSERT INTO PRODUCTS (ProductId, CategoryId, Name, Brand, Price, Amount, Description, Length, Height, Width, Picture) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ";
+        $statement = $this->db->prepare($query);
+        $productId = uniqid("P-");
+        $params = [
+            $productId,
+            $categoryId,
+            $name,
+            $brand,
+            $price,
+            $amount,
+            empty($description) ? null : $description,
+            empty($length) ? null : $length,
+            empty($height) ? null : $height,
+            empty($width) ? null : $width,
+            empty($image) ? null : $image
+        ];
+        $statement->bind_param("ssssdisddds", ...$params);
+        $res = $statement->execute();
+
+        if (!empty($model)) {
+            $statementModel = $this->db->prepare("INSERT INTO PRODUCT_MODELS (Name, ProductId) VALUES (?, ?)");
+            $statementModel->bind_param("ss", $model, $productId);
+            $res = $res and $statementModel->execute();
+        }
+        return $res;
+    }
+
     public function editProduct(
         $productId,
         $newName,
@@ -235,29 +284,39 @@ class DatabaseHelper {
             SET Name = ?, 
                 Brand = ?, 
                 Description = ?, 
-                Picture = ?, 
                 Price = ?, 
                 Amount = ?, 
                 CategoryId = ?, 
                 Length = ?, 
                 Height = ?, 
                 Width = ?
-            WHERE ProductId = ?";
-        $statement = $this->db->prepare($query);
-        $statement->bind_param(
-            "ssssdissdds",
+        ";
+        $params = [
             $newName,
             $newBrand,
             $newDescription,
-            $newImage,
             $newPrice,
             $newAmount,
             $newCategoryId,
             $newLength,
             $newHeight,
-            $newWidth,
-            $productId
-        );
+            $newWidth
+        ];
+        $types = "sssdisddd";
+
+        // Adding image if provided.
+        if (!empty($newImage)) {
+            $query .= ", Picture = ?";
+            $params[] = $newImage;
+            $types .= "s";
+        }
+
+        $query .= " WHERE ProductId = ?";
+        $params[] = $productId;
+        $types .= "s";
+
+        $statement = $this->db->prepare($query);
+        $statement->bind_param($types, ...$params);
         $res1 = $statement->execute();
 
         // Update or insert model.
@@ -270,4 +329,5 @@ class DatabaseHelper {
         $res2 = $statementModel->execute();
         return $res1 and $res2;
     }
+
 }
