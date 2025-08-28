@@ -24,7 +24,9 @@
                 <li class="nav-item me-2">
                     <div class="input-group">
                         <div class="input-group-text" id="btnGroupAddon2"><i class="bi bi-search"></i></div>
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <form method="get" action="search.php">
+                            <input name="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        </form>
                     </div>
                 </li>
                 <li class="nav-item me-2">

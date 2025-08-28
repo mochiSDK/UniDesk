@@ -334,4 +334,12 @@ class DatabaseHelper {
         return $res1 and $res2;
     }
 
+    public function searchProduct($query) {
+        $statement = $this->db->prepare("SELECT ProductId, Name, Description, Price, Picture FROM PRODUCTS WHERE Name LIKE ?");
+        $search = "%" . $query . "%";
+        $statement->bind_param("s", $search);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
