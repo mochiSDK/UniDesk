@@ -116,7 +116,7 @@ class DatabaseHelper {
     }
 
     public function getRandomProducts($amount = 5) {
-        $statement = $this->db->prepare("SELECT Name, Price, Description, Picture FROM PRODUCTS ORDER BY RAND() LIMIT ?");
+        $statement = $this->db->prepare("SELECT Name, Price, Description, Picture, ProductId FROM PRODUCTS ORDER BY RAND() LIMIT ?");
         $statement->bind_param("i", $amount);
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
