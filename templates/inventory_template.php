@@ -147,7 +147,7 @@
                                         <h1 class="modal-title fs-5" id="editModalLabel<?php echo $product["ProductId"]; ?>">Edit Product</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form method="post" action="handlers/edit_product.php?productId=<?php echo $product["ProductId"]; ?>">
+                                    <form method="post" action="handlers/edit_product.php?productId=<?php echo $product["ProductId"]; ?>" enctype="multipart/form-data">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label for="nameInput<?php echo $product["ProductId"]; ?>" class="form-label">Name</label>

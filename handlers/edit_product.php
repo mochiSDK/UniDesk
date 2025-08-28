@@ -1,13 +1,14 @@
 <?php
 require_once("../bootstrap.php");
 
+$imgDir = "/opt/lampp/htdocs/UniDesk/images/products/";
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $productId = $_GET["productId"];
     $newName = $_POST["productName"];
     $newBrand = $_POST["productBrand"];
     $newModel = $_POST["productModel"];
     $newDescription = $_POST["productDescription"];
-    $newImage = $_POST["productImage"];
     $newPrice = $_POST["productPrice"];
     $newAmount = $_POST["productAmount"];
     $newCategoryId = $_POST["productCategory"];
@@ -15,7 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newHeight = $_POST["productHeight"];
     $newWidth = $_POST["productWidth"];
 
-    // TODO: Implement image update.
+    $newImage = "";
+    if (isset($_FILES["productImage"])) {
+        $file = $_FILES["productImage"];
+        $targetPath = $imgDir . basename($file["name"]);
+        move_uploaded_file($file["tmp_name"], $targetPath);
+        $newImage = $targetPath;
+    }
+
     $db_helper->editProduct(
         $productId,
         $newName,
