@@ -32,6 +32,13 @@ class DatabaseHelper {
         return $result->fetch_assoc(); // Restituisce un solo prodotto o null
     }
 
+    public function getCartItems($cartId) {
+        $stmt = $this->db->prepare("SELECT p.* FROM contains c JOIN PRODUCTS p ON c.ProductId = p.ProductId WHERE c.CartId = ?");
+        $stmt->bind_param("s", $cartId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
 
     public function getCartId($email) {
         $stmt = $this->db->prepare("SELECT CartId FROM CARTS WHERE Email = ?");
