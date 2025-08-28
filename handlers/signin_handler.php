@@ -1,8 +1,8 @@
 ﻿<?php
-
-
 session_start();
-require_once '../includes/db_config.php';
+require_once '../db/database_helper.php';
+
+$dbh = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -14,46 +14,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../signin_form.php");
         exit();
     }
+    
+    $user = $dbh->getUserByEmail($email);
 
-    $sql = "SELECT Username, Email, Password FROM CUSTOMERS WHERE Email = ?";
-
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 1) {
-            $user = $result->fetch_assoc();
-            
-            if ($password === $user['Password']) {
-                // Password corretta
-                session_regenerate_id(true);
-                
-                $_SESSION['loggedin'] = true;
-                $_SESSION['user_email'] = $user['Email'];
-                $_SESSION['username'] = $user['Username'];
-                
-                header("Location: ../index.php");
-                exit();
-                
-            } else {
-                // Password non corretta
-                $_SESSION['error_message'] = "La password non è corretta.";
-                header("Location: ../signin_form.php");
-                exit();
-            }
-        } else {
-            // Nessun utente trovato con quella email
-            $_SESSION['error_message'] = "Nessun account trovato con questa email.";
-            header("Location: ../signin_form.php");
-            exit();
-        }
-        $stmt->close();
+    if ($user && $password === $user['Password']) { 
+        $_SESSION['loggedin'] = true;
+        $_SESSION['user_email'] = $user['Email'];
+        $_SESSION['username'] = $user['Username'];
+        header("Location: ../index.php");
+        exit();
+    } else {
+        $_SESSION['error_message'] = "Invalid credentials.";
+        header("Location: ../signin_form.php");
+        exit();
     }
-    $conn->close();
-
-} else {
-    header("Location: ../signin_form.php");
-    exit();
 }
 ?>
+    
+
+ 
