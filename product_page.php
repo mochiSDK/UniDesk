@@ -1,32 +1,23 @@
 <?php
 session_start(); 
-require_once 'includes/db_config.php';
 
-// 1. ID product from URL
-if (isset($_GET['ProductId']) && !empty($_GET['ProductId'])) {
-    $product_id = $_GET['ProductId'];
-} else {
-    die("ERROR: ID product not found.");
+require_once 'db/database_helper.php';
+
+$dbh = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
+
+// Get the Product ID from the URL
+if (!isset($_GET['ProductId']) || empty($_GET['ProductId'])) {
+    die("ERROR: Product ID not specified.");
 }
+$product_id = $_GET['ProductId'];
 
-// 2. query to get info
-$sql = "SELECT * FROM PRODUCTS WHERE ProductId = ?";
+// helper's method to get the product data
+$product = $dbh->getProductById($product_id);
 
-if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("s", $product_id);
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        if ($result->num_rows == 1) {
-            $product = $result->fetch_assoc();
-        } else {
-            die("ERROR: Product not found.");
-        }
-    } else {
-        echo "Oops! something wrong.";
-    }
-    $stmt->close();
+// If no product is found with that ID, stop 
+if (!$product) {
+    die("ERROR: Product not found.");
 }
-$conn->close();
 ?>
 
 <!doctype html>
@@ -36,19 +27,22 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo htmlspecialchars($product['Name']); ?> - UniDesk</title>
     
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS and Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     
-    <!-- Stylesheet Link -->
+    <!-- Link to the stylesheet -->
     <link href="assets/product_style.css" rel="stylesheet">
 </head>
 <body>
 
-<?php require_once "navbar_controller.php"; ?>
+<?php 
+// Include the navbar 
+require_once 'templates/navbar.php'; 
+?>
 
 <div class="container my-5">
-    <!-- Card Product Details -->
+    <!-- Product Details Card -->
     <div class="product-card p-4">
         <div class="row g-5">
             <div class="col-lg-5 text-center">
@@ -69,11 +63,12 @@ $conn->close();
                     <p><?php echo nl2br(htmlspecialchars($product['Description'])); ?></p>
                 </div>
 
+                <!-- Form to add the product to the cart -->
                 <form action="handlers/add_to_cart_handler.php" method="POST">
+                    <!-- Hidden field to send the Product ID -->
                     <input type="hidden" name="ProductId" value="<?php echo htmlspecialchars($product['ProductId']); ?>">
-                    <input type="hidden" name="quantity" value="1">
-
-                    <!-- Buttons -->
+                    
+                    <!-- Buttons container -->
                     <div class="d-grid gap-2 mt-4 action-buttons-container">
                         <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cart-plus"></i> Add to cart</button>
                         <button type="button" class="btn btn-compare"><i class="bi bi-arrow-left-right"></i> Compare</button>
