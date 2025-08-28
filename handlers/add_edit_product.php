@@ -4,6 +4,7 @@ require_once("../bootstrap.php");
 $imgDir = "../images/products/";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $mode = $_GET["mode"];
     $productId = $_GET["productId"];
     $newName = $_POST["productName"];
     $newBrand = $_POST["productBrand"];
@@ -24,20 +25,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $newImage = str_replace("../", "", $targetPath);    // Correct relative path for db.
     }
 
-    $db_helper->editProduct(
-        $productId,
-        $newName,
-        $newBrand,
-        $newModel,
-        $newDescription,
-        $newImage,
-        $newPrice,
-        $newAmount,
-        $newCategoryId,
-        $newLength,
-        $newHeight,
-        $newWidth
-    );
+    if ($mode == "add") {
+        $db_helper->addProduct(
+            $newName,
+            $newBrand,
+            $newModel,
+            $newDescription,
+            $newImage,
+            $newPrice,
+            $newAmount,
+            $newCategoryId,
+            $newLength,
+            $newHeight,
+            $newWidth
+        );
+    } else {
+        $db_helper->editProduct(
+            $productId,
+            $newName,
+            $newBrand,
+            $newModel,
+            $newDescription,
+            $newImage,
+            $newPrice,
+            $newAmount,
+            $newCategoryId,
+            $newLength,
+            $newHeight,
+            $newWidth
+        );
+    }
     // Refreshing page.
     header("Location: ../inventory.php");
     exit;

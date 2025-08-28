@@ -145,6 +145,48 @@ class DatabaseHelper {
         return $statement->execute();
     }
 
+    public function addProduct(
+        $name,
+        $brand,
+        $model,
+        $description,
+        $image,
+        $price,
+        $amount,
+        $categoryId,
+        $length,
+        $height,
+        $width
+    ) {
+        $query = "INSERT INTO PRODUCTS (ProductId, CategoryId, Name, Brand, Price, Amount, Description, Length, Height, Width, Picture) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ";
+        $statement = $this->db->prepare($query);
+        $productId = uniqid("P-");
+        $params = [
+            $productId,
+            $categoryId,
+            $name,
+            $brand,
+            $price,
+            $amount,
+            empty($description) ? null : $description,
+            empty($length) ? null : $length,
+            empty($height) ? null : $height,
+            empty($width) ? null : $width,
+            empty($image) ? null : $image
+        ];
+        $statement->bind_param("ssssdisddds", ...$params);
+        $res = $statement->execute();
+
+        if (!empty($model)) {
+            $statementModel = $this->db->prepare("INSERT INTO PRODUCT_MODELS (Name, ProductId) VALUES (?, ?)");
+            $statementModel->bind_param("ss", $model, $productId);
+            $res = $res and $statementModel->execute();
+        }
+        return $res;
+    }
+
     public function editProduct(
         $productId,
         $newName,
