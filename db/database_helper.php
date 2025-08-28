@@ -80,6 +80,20 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getCategoryById($categoryId) {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCT_CATEGORIES WHERE CategoryId = ?");
+        $stmt->bind_param("s", $categoryId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    public function getProductsByCategoryId($categoryId) {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCTS WHERE CategoryId = ?");
+        $stmt->bind_param("s", $categoryId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getBestSellers($amount = 5) {
         $query = "SELECT
                 p.ProductId,
