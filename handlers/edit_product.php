@@ -1,7 +1,7 @@
 <?php
 require_once("../bootstrap.php");
 
-$imgDir = "/opt/lampp/htdocs/UniDesk/images/products/";
+$imgDir = "../images/products/";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $productId = $_GET["productId"];
