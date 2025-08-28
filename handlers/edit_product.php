@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $file = $_FILES["productImage"];
         $targetPath = $imgDir . basename($file["name"]);
         move_uploaded_file($file["tmp_name"], $targetPath);
-        $newImage = $targetPath;
+        $newImage = str_replace("../", "", $targetPath);    // Correct relative path for db.
     }
 
     $db_helper->editProduct(
