@@ -156,29 +156,39 @@ class DatabaseHelper {
             SET Name = ?, 
                 Brand = ?, 
                 Description = ?, 
-                Picture = ?, 
                 Price = ?, 
                 Amount = ?, 
                 CategoryId = ?, 
                 Length = ?, 
                 Height = ?, 
                 Width = ?
-            WHERE ProductId = ?";
-        $statement = $this->db->prepare($query);
-        $statement->bind_param(
-            "ssssdissdds",
+        ";
+        $params = [
             $newName,
             $newBrand,
             $newDescription,
-            $newImage,
             $newPrice,
             $newAmount,
             $newCategoryId,
             $newLength,
             $newHeight,
-            $newWidth,
-            $productId
-        );
+            $newWidth
+        ];
+        $types = "sssdisddd";
+
+        // Adding image if provided.
+        if (!empty($newImage)) {
+            $query .= ", Picture = ?";
+            $params[] = $newImage;
+            $types .= "s";
+        }
+
+        $query .= " WHERE ProductId = ?";
+        $params[] = $productId;
+        $types .= "s";
+
+        $statement = $this->db->prepare($query);
+        $statement->bind_param($types, ...$params);
         $res1 = $statement->execute();
 
         // Update or insert model.
