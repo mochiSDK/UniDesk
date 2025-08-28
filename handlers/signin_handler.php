@@ -1,9 +1,5 @@
 ﻿<?php
-/*
- * signin_handler.php
- * Gestisce la logica di accesso dell'utente.
- *
- */
+
 
 session_start();
 require_once '../includes/db_config.php';

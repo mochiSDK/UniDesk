@@ -10,6 +10,63 @@ class DatabaseHelper {
         }
     }
 
+    public function getUserByEmail($email) {
+        $stmt = $this->db->prepare("SELECT * FROM CUSTOMERS WHERE Email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    public function registerUser($username, $email, $password) {
+        // Nota: qui non c'è hashing, come da tua richiesta precedente.
+        $stmt = $this->db->prepare("INSERT INTO CUSTOMERS (Username, Email, Password, IsVendor) VALUES (?, ?, ?, 0)");
+        $stmt->bind_param("sss", $username, $email, $password);
+        return $stmt->execute();
+    }
+
+    public function getProductById($productId) {
+        $stmt = $this->db->prepare("SELECT * FROM PRODUCTS WHERE ProductId = ?");
+        $stmt->bind_param("s", $productId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc(); // Restituisce un solo prodotto o null
+    }
+
+
+    public function getCartId($email) {
+        $stmt = $this->db->prepare("SELECT CartId FROM CARTS WHERE Email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result ? $result['CartId'] : null;
+    }
+
+
+    public function createCart($email) {
+        $cart_id = uniqid('cart_', true);
+        $stmt = $this->db->prepare("INSERT INTO CARTS (CartId, Email) VALUES (?, ?)");
+        $stmt->bind_param("ss", $cart_id, $email);
+        if ($stmt->execute()) {
+            return $cart_id;
+        }
+        return null;
+    }
+
+
+    public function isProductInCart($cartId, $productId) {
+        $stmt = $this->db->prepare("SELECT ProductId FROM contains WHERE CartId = ? AND ProductId = ?");
+        $stmt->bind_param("ss", $cartId, $productId);
+        $stmt->execute();
+        return $stmt->get_result()->num_rows > 0;
+    }
+
+
+    public function addProductToCart($cartId, $productId) {
+        $stmt = $this->db->prepare("INSERT INTO contains (CartId, ProductId) VALUES (?, ?)");
+        $stmt->bind_param("ss", $cartId, $productId);
+        return $stmt->execute();
+    }
+
     public function getCategories() {
         $statement = $this->db->prepare("SELECT * FROM PRODUCT_CATEGORIES");
         $statement->execute();
