@@ -24,9 +24,9 @@ class DatabaseHelper {
     }
 
     public function registerUser($username, $email, $password) {
-        // Nota: qui non c'è hashing, come da tua richiesta precedente.
+        $hash = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $this->db->prepare("INSERT INTO CUSTOMERS (Username, Email, Password, IsVendor) VALUES (?, ?, ?, 0)");
-        $stmt->bind_param("sss", $username, $email, $password);
+        $stmt->bind_param("sss", $username, $email, $hash);
         return $stmt->execute();
     }
 
@@ -267,8 +267,9 @@ class DatabaseHelper {
         if ($newUsername == "" or $newPassword == "" or $email == "") {
             die("Credentials update aborted.");
         }
+        $hash = password_hash($newPassword, PASSWORD_BCRYPT);
         $statement = $this->db->prepare("UPDATE CUSTOMERS SET Username = ?, Password = ? WHERE Email = ?");
-        $statement->bind_param("sss", $newUsername, $newPassword, $email);
+        $statement->bind_param("sss", $newUsername, $hash, $email);
         $statement->execute();
         return $statement->affected_rows == 1;
     }

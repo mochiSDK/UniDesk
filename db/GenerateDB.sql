@@ -1,16 +1,16 @@
 insert into CUSTOMERS
-values ("mario.rossi@unibo.it", "mario.rossi", "Z123", true),
-	("virginia.trevisan@studio.unibo.it", "virginia.trevisan", "A123", false),
-       ("fabiola.pisani@studio.unibo.it", "fabiola.pisani", "B123", false),
-       ("giuseppe.fiorentini@studio.unibo.it", "giuseppe.fiorentini", "C123", false),
-       ("valentino.russo@studio.unibo.it", "valentino.russo", "D123", false),
-       ("rosanna.pagnotto@studio.unibo.it", "rosanna.pagnotto", "E123", false),
-       ("isotta.sagese@studio.unibo.it", "isotta.sagese", "F123", false),
-       ("viviano.colombo@studio.unibo.it", "viviano.colombo", "G123", false),
-       ("elvio.ricci@studio.unibo.it", "elvio.ricci", "H123", false),
-       ("emanuele.greco@studio.unibo.it", "emanuele.greco", "I123", false),
-       ("simona.bergamaschi@studio.unibo.it", "simona.bergamaschi", "J123", false),
-       ("caterina.marchesi@studio.unibo.it", "caterina.marchesi", "K123", false);
+values ("mario.rossi@unibo.it", "mario.rossi", "$2y$10$eC02nvRYoRZT1VVhdKEmgO698EztDvdx8DVC6/SuBKKjtVS1DGt3y", true),
+	("virginia.trevisan@studio.unibo.it", "virginia.trevisan", "$2y$10$fRoBe1xEFMCt9Epu4b0dcOTa0dUs33nlQxVMmoielLs7ru8kkR6Re", false),
+       ("fabiola.pisani@studio.unibo.it", "fabiola.pisani", "$2y$10$0XXYs0cBn0hYYTC8NVLf9ux10Q61WcGvF5LO8IYJAEgsqcYTiS04a", false),
+       ("giuseppe.fiorentini@studio.unibo.it", "giuseppe.fiorentini", "$2y$10$2gLoy6PkLV9MJ8UeQpUdbee22wEhq2/dC39pyLOuWJbgABt5b8w76", false),
+       ("valentino.russo@studio.unibo.it", "valentino.russo", "$2y$10$anOthmKj6AHg2hFMXqZ4BOZdLBIP/qpG2vk26oFNyFHXDdeE1ha36", false),
+       ("rosanna.pagnotto@studio.unibo.it", "rosanna.pagnotto", "$2y$10$ZMqgj7EXbYA5ChT9aCxj9OyPqK6xv.rU/DdMHfowxd1liseYKLF4e", false),
+       ("isotta.sagese@studio.unibo.it", "isotta.sagese", "$2y$10$jST7MHR6HDbrEnsKJlrpD.8MvjUBG//PvbT8JbvrPKo0xLvIQSALW", false),
+       ("viviano.colombo@studio.unibo.it", "viviano.colombo", "$2y$10$I4CZK2tmQo/vvjXK8s4tVOMVRKbGn4dX0jFsxpAZNZrn31w7ztEnG", false),
+       ("elvio.ricci@studio.unibo.it", "elvio.ricci", "$2y$10$RkpdJrpRPEbml01Lm/HxPebg/jJbyp6SNv8IoRY5jWZ027er00rJa", false),
+       ("emanuele.greco@studio.unibo.it", "emanuele.greco", "$2y$10$W8R5Dk2XXz22z4YVfeblJOdN.wQ8nCU8wgbhiPZ5Q4sxnY1AsFR7y", false),
+       ("simona.bergamaschi@studio.unibo.it", "simona.bergamaschi", "$2y$10$fHOQ4.vt4Rv2Un1TkITpFevPYhqJD5gI4iBTa464iFTxr7WBOulWe", false),
+       ("caterina.marchesi@studio.unibo.it", "caterina.marchesi", "$2y$10$2gzZDAhw/j/lsYTKZhWR3OtzyhCGvbu0.mNPIPWx.TxE75HXnj0fS", false);
 
 insert into PRODUCT_CATEGORIES
 values ("C0", "Writing", "images/categories/writing.jpg"),

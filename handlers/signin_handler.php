@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $user = $dbh->getUserByEmail($email);
 
-    if ($user && $password === $user['Password']) { 
+    if ($user && password_verify($password, $user["Password"])) { 
         $_SESSION['loggedin'] = true;
         $_SESSION['user_email'] = $user['Email'];
         $_SESSION['username'] = $user['Username'];
