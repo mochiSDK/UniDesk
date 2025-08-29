@@ -1,8 +1,5 @@
 <?php
-session_start(); 
-
-require_once 'db/database_helper.php';
-$db_helper = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
+require_once("bootstrap.php");
 
 // Get the Product ID from the URL
 if (!isset($_GET['ProductId']) || empty($_GET['ProductId'])) {
@@ -19,8 +16,9 @@ if (!$product) {
 }
 ?>
 
+<?php require_once "handlers/theme_handler.php"; ?>
 <!doctype html>
-<html lang="it">
+<html lang="en" data-bs-theme="<?php echo $theme; ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
