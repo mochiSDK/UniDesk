@@ -30,7 +30,7 @@
                                 <h1 class="modal-title fs-5" id="addProductModalLabel">Add Product</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form method="post" action="handlers/add_edit_product.php?productId=<?php echo $product["ProductId"]; ?>&mode=add">
+                            <form method="post" action="handlers/add_edit_product.php?productId=<?php echo $product["ProductId"]; ?>&mode=add" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="nameInput" class="form-label">Name</label>
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="modelInput" class="form-label">Model</label>
-                                        <input name="productModel" class="form-control" id="modelInput" placeholder="Product model" required>
+                                        <input name="productModel" class="form-control" id="modelInput" placeholder="Product model">
                                     </div>
                                     <div class="mb-3">
                                         <label for="descriptionInput" class="form-label">Description</label>
