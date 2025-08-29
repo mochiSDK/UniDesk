@@ -106,7 +106,7 @@ class DatabaseHelper {
 
 
     public function createCart($email) {
-        $cart_id = uniqid('cart_', true);
+        $cart_id = uniqid('CART-', true);
         $stmt = $this->db->prepare("INSERT INTO CARTS (CartId, Email) VALUES (?, ?)");
         $stmt->bind_param("ss", $cart_id, $email);
         if ($stmt->execute()) {
