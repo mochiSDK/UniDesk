@@ -38,7 +38,7 @@ if (!$product) {
 
 <?php 
 // Include the navbar 
-require_once 'templates/navbar.php'; 
+require_once 'navbar_controller.php'; 
 ?>
 
 <div class="container my-5">

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php require_once 'navbar.php'; ?>
+<?php require_once 'navbar_controller.php'; ?>
 
 <div class="container my-5">
     <h1 class="mb-4">My cart</h1>

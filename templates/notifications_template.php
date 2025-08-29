@@ -10,7 +10,7 @@
 <body>
 
 <?php 
-require_once 'navbar.php'; 
+require_once 'navbar_controller.php'; 
 ?>
 
 <div class="position-fixed top-30 start-50 translate-middle" style="z-index: 11">
