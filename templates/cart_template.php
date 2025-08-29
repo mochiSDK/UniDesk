@@ -15,7 +15,6 @@
 <div class="container my-5">
     <h1 class="mb-4">My cart</h1>
     <div class="row">
-        <!-- product list column -->
         <div class="col-lg-8">
             <div class="cart-items-container">
                 <div class="cart-header d-none d-md-flex">
@@ -27,17 +26,14 @@
                     <p class="text-center p-4">Your cart is empty.</p>
                 <?php else: ?>
                     <?php 
-                    // template cicle to show all cart items
                     foreach ($templateParams["cart_items"] as $item): 
-                        // La variabile $item viene passata automaticamente al template
-                        require 'cart_item.php'; // Richiama il template per il singolo item
+                        require 'cart_item.php'; 
                     endforeach; 
                     ?>
                 <?php endif; ?>
             </div>
         </div>
 
-        <!-- riepilogo -->
         <div class="col-lg-4">
             <div class="summary-card">
                 <h4>Summary</h4>
@@ -46,7 +42,9 @@
                     <span class="summary-total">€<?php echo number_format($templateParams["total_price"], 2, ',', '.'); ?></span>
                 </div>
                 <div class="d-grid">
-                    <button class="btn btn-primary btn-lg">Checkout</button>
+                    <form action="handlers/checkout_handler.php" method="POST">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Checkout</button>
+                    </form>
                 </div>
             </div>
         </div>

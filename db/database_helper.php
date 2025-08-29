@@ -10,6 +10,12 @@ class DatabaseHelper {
         }
     }
 
+    public function getVendors() {
+        $stmt = $this->db->prepare("SELECT Email FROM CUSTOMERS WHERE IsVendor = 1");
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getUserByEmail($email) {
         $stmt = $this->db->prepare("SELECT * FROM CUSTOMERS WHERE Email = ?");
         $stmt->bind_param("s", $email);
@@ -37,6 +43,42 @@ class DatabaseHelper {
         $stmt->bind_param("s", $cartId);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function decreaseProductStock($productId, $quantity) {
+        $stmt = $this->db->prepare("UPDATE PRODUCTS SET Amount = Amount - ? WHERE ProductId = ?");
+        $stmt->bind_param("is", $quantity, $productId);
+        return $stmt->execute();
+    }
+
+    public function createOrderFromCart($email, $cartId, $total) {
+        $orderId = uniqid("ORD-");
+        $purchaseDate = date("Y-m-d H:i:s"); 
+        $status = "Pending";
+        $deliveryDate = date('Y-m-d', strtotime('+1 day'));
+
+        $stmt = $this->db->prepare("INSERT INTO ONLINE_ORDERS (OrderId, Email, PurchaseDate, Status, Total, DeliveryDate) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssds", $orderId, $email, $purchaseDate, $status, $total, $deliveryDate);
+        
+        if (!$stmt->execute()) {
+            return false; 
+        }
+
+        $cartItems = $this->getCartItems($cartId);
+        
+        $stmt_includes = $this->db->prepare("INSERT INTO includes (OrderId, ProductId) VALUES (?, ?)");
+        foreach ($cartItems as $item) {
+            $productId = $item['ProductId'];
+            $stmt_includes->bind_param("ss", $orderId, $productId);
+            $stmt_includes->execute();
+            $this->decreaseProductStock($productId, 1);
+        }
+
+        $stmt_clear = $this->db->prepare("DELETE FROM contains WHERE CartId = ?");
+        $stmt_clear->bind_param("s", $cartId);
+        $stmt_clear->execute();
+
+        return $orderId; // 
     }
 
 

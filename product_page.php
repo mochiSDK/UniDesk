@@ -2,8 +2,7 @@
 session_start(); 
 
 require_once 'db/database_helper.php';
-
-$dbh = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
+$db_helper = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
 
 // Get the Product ID from the URL
 if (!isset($_GET['ProductId']) || empty($_GET['ProductId'])) {
@@ -12,7 +11,7 @@ if (!isset($_GET['ProductId']) || empty($_GET['ProductId'])) {
 $product_id = $_GET['ProductId'];
 
 // helper's method to get the product data
-$product = $dbh->getProductById($product_id);
+$product = $db_helper->getProductById($product_id);
 
 // If no product is found with that ID, stop 
 if (!$product) {
@@ -36,8 +35,7 @@ if (!$product) {
 </head>
 <body>
 
-<?php 
-// Include the navbar 
+<?php  
 require_once 'navbar_controller.php'; 
 ?>
 
