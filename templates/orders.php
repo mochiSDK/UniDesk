@@ -30,7 +30,7 @@
                         <td><?php echo $order["PurchaseDate"] ?></td>
                         <td><?php echo $order["DeliveryDate"] ?></td>
                         <td><?php echo $order["Total"] ?>€</td>
-                        <td><a href="handlers/ship_order.php?orderId=<?php echo $order['OrderId']; ?>" type="submit" class="btn btn-primary">Ship</a></td>
+                        <td><a href="handlers/ship_order.php?orderId=<?php echo $order['OrderId']; ?>&email=<?php echo $order["Email"]; ?>" type="submit" class="btn btn-primary">Ship</a></td>
                         <td>
                             <table class="table">
                                 <thead>

@@ -183,7 +183,7 @@ class DatabaseHelper {
     }
 
     public function getIncomingOrdersIdsDatesTotal() {
-        $query = "SELECT DISTINCT o.OrderId, o.PurchaseDate, o.DeliveryDate, o.Total
+        $query = "SELECT DISTINCT o.OrderId, o.Email, o.PurchaseDate, o.DeliveryDate, o.Total
             FROM includes i
             LEFT JOIN ONLINE_ORDERS o ON o.OrderId = i.OrderId
             WHERE Status = 'Pending'
@@ -354,7 +354,7 @@ class DatabaseHelper {
         $statement = $this->db->prepare("INSERT INTO NOTIFICATIONS (NotificationId, Status, Description, Email) VALUES (?, ?, ?, ?)");
         $notificationId = uniqid("N-");
         $status = "Unread";
-        $statement->bind_param("ss", $notificationId, $status, $description, $receiverEmail);
+        $statement->bind_param("ssss", $notificationId, $status, $description, $receiverEmail);
         return $statement->execute();
     }
 
