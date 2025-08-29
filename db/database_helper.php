@@ -413,4 +413,10 @@ class DatabaseHelper {
         return $statement->execute();
     }
 
+    public function confirmDelivery($orderId) {
+        $statement = $this->db->prepare("UPDATE ONLINE_ORDERS SET Status = 'Delivered' WHERE OrderId = ?");
+        $statement->bind_param("s", $orderId);
+        return $statement->execute();
+    }
+
 }

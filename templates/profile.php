@@ -77,6 +77,7 @@
               <th scope="col">Purchase Date</th>
               <th scope="col">Delivery Date</th>
               <th scope="col">Status</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -90,6 +91,11 @@
                 <td><?php echo $product["PurchaseDate"]; ?></td>
                 <td><?php echo $product["DeliveryDate"]; ?></td>
                 <td><?php echo $product["Status"]; ?></td>
+                <td>
+                  <a href="handlers/confirm_delivery.php?orderId=<?php echo urlencode($product['OrderId']); ?>" id="confirmDelivery<?php echo $product["OrderId"]; ?>" type="submit" class="btn btn-primary <?php if ($product["Status"] == "Delivered"): ?>disabled<?php endif; ?>">
+                    Confirm delivery
+                  </a>
+                </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
