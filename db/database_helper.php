@@ -392,6 +392,14 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getUnreadNotificationAmount($email) {
+        $statement = $this->db->prepare("SELECT COUNT(*) AS Amount FROM NOTIFICATIONS WHERE Email = ? AND Status = 'Unread'");
+        $statement->bind_param("s", $email);
+        $statement->execute();
+        $result = $statement->get_result()->fetch_assoc();
+        return $result ? $result["Amount"] : null;
+    }
+
     public function addNotification($receiverEmail, $description) {
         $statement = $this->db->prepare("INSERT INTO NOTIFICATIONS (NotificationId, Status, Description, Email) VALUES (?, ?, ?, ?)");
         $notificationId = uniqid("N-");
