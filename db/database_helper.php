@@ -343,4 +343,25 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function addNotification($receiverEmail, $description) {
+        $statement = $this->db->prepare("INSERT INTO NOTIFICATIONS (NotificationId, Status, Description, Email) VALUES (?, ?, ?, ?)");
+        $notificationId = uniqid("N-");
+        $status = "Unread";
+        $statement->bind_param("ss", $notificationId, $status, $description, $receiverEmail);
+        return $statement->execute();
+    }
+
+    public function deleteNotification($id) {
+        $statement = $this->db->prepare("DELETE FROM NOTIFICATIONS WHERE NotificationId = ?");
+        $statement->bind_param("s", $id);
+        return $statement->execute();
+    }
+
+    public function readNotification($id) {
+        $statement = $this->db->prepare("UPDATE NOTIFICATIONS SET Status = ? WHERE NotificationId = ?");
+        $status = "Read";
+        $statement->bind_param("ss", $status, $id);
+        return $statement->execute();
+    }
+
 }
