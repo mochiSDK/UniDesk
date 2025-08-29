@@ -33,7 +33,7 @@
                     <a href="cart.php" role="button" class="btn btn-outline-secondary"><i class="bi bi-cart-fill"></i></a>
                 </li>
                 <li class="nav-item me-2">
-                    <a href="#" role="button" class="btn btn-outline-secondary"><i class="bi bi-bell-fill"></i></a>
+                <a href="notifications.php" role="button" class="btn btn-outline-secondary"><i class="bi bi-bell-fill"></i></a>
                 </li>
                 <li class="nav-item dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

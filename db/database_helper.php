@@ -343,6 +343,13 @@ class DatabaseHelper {
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getNotificationsByEmail($email) {
+        $statement = $this->db->prepare("SELECT * FROM NOTIFICATIONS WHERE Email = ? ORDER BY Status ASC");
+        $statement->bind_param("s", $email);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function addNotification($receiverEmail, $description) {
         $statement = $this->db->prepare("INSERT INTO NOTIFICATIONS (NotificationId, Status, Description, Email) VALUES (?, ?, ?, ?)");
         $notificationId = uniqid("N-");
