@@ -2,8 +2,7 @@
 session_start(); 
 
 require_once 'db/database_helper.php';
-
-$dbh = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
+$db_helper = new DatabaseHelper("localhost", "root", "", "UniDeskDB");
 
 // Get the Product ID from the URL
 if (!isset($_GET['ProductId']) || empty($_GET['ProductId'])) {
@@ -12,7 +11,7 @@ if (!isset($_GET['ProductId']) || empty($_GET['ProductId'])) {
 $product_id = $_GET['ProductId'];
 
 // helper's method to get the product data
-$product = $dbh->getProductById($product_id);
+$product = $db_helper->getProductById($product_id);
 
 // If no product is found with that ID, stop 
 if (!$product) {
@@ -36,9 +35,8 @@ if (!$product) {
 </head>
 <body>
 
-<?php 
-// Include the navbar 
-require_once 'templates/navbar.php'; 
+<?php  
+require_once 'navbar_controller.php'; 
 ?>
 
 <div class="container my-5">
@@ -70,8 +68,13 @@ require_once 'templates/navbar.php';
                     
                     <!-- Buttons container -->
                     <div class="d-grid gap-2 mt-4 action-buttons-container">
-                        <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cart-plus"></i> Add to cart</button>
-                        <button type="button" class="btn btn-compare"><i class="bi bi-arrow-left-right"></i> Compare</button>
+                                                
+                        <?php if ($product['Amount'] > 0): ?>
+                            <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cart-plus"></i> Add to cart</button>
+                        <?php else: ?>
+                            <button type="button" class="btn btn-secondary btn-lg" disabled><i class="bi bi-x-circle"></i> Out of stock</button>
+                        <?php endif; ?>
+                        
                     </div>
                 </form>
                 <!-- End of form -->

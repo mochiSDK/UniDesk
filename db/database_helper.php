@@ -10,6 +10,12 @@ class DatabaseHelper {
         }
     }
 
+    public function getVendors() {
+        $stmt = $this->db->prepare("SELECT Email FROM CUSTOMERS WHERE IsVendor = 1");
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getUserByEmail($email) {
         $stmt = $this->db->prepare("SELECT * FROM CUSTOMERS WHERE Email = ?");
         $stmt->bind_param("s", $email);
@@ -37,6 +43,56 @@ class DatabaseHelper {
         $stmt->bind_param("s", $cartId);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function decreaseProductStock($productId, $quantity) {
+        $stmt = $this->db->prepare("UPDATE PRODUCTS SET Amount = Amount - ? WHERE ProductId = ?");
+        $stmt->bind_param("is", $quantity, $productId);
+        return $stmt->execute();
+    }
+
+    public function createOrderFromCart($email, $cartId, $total) {
+        $orderId = uniqid("ORD-");
+        $purchaseDate = date("Y-m-d H:i:s"); 
+        $status = "Pending";
+        $deliveryDate = date('Y-m-d', strtotime('+1 day'));
+
+        $stmt = $this->db->prepare("INSERT INTO ONLINE_ORDERS (OrderId, Email, PurchaseDate, Status, Total, DeliveryDate) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssds", $orderId, $email, $purchaseDate, $status, $total, $deliveryDate);
+        
+        if (!$stmt->execute()) {
+            return false; 
+        }
+
+        $cartItems = $this->getCartItems($cartId);
+
+        $vendors = $this->getVendors();
+        
+        $stmt_includes = $this->db->prepare("INSERT INTO includes (OrderId, ProductId) VALUES (?, ?)");
+        foreach ($cartItems as $item) {
+            $productId = $item['ProductId'];
+            $productName = $item['Name'];
+            $currentStock = $item['Amount'];
+            
+            $stmt_includes->bind_param("ss", $orderId, $productId);
+            $stmt_includes->execute();
+            $this->decreaseProductStock($productId, 1);
+            
+            if (($currentStock - 1) == 0) {
+                if ($vendors) {
+                    $stock_notification_message = "The product '{$productName}' is now out of stock.";
+                    foreach ($vendors as $vendor) {
+                        $this->addNotification($vendor['Email'], $stock_notification_message);
+                    }
+                }
+            }
+        }
+
+        $stmt_clear = $this->db->prepare("DELETE FROM contains WHERE CartId = ?");
+        $stmt_clear->bind_param("s", $cartId);
+        $stmt_clear->execute();
+
+        return $orderId; // 
     }
 
 
@@ -183,7 +239,7 @@ class DatabaseHelper {
     }
 
     public function getIncomingOrdersIdsDatesTotal() {
-        $query = "SELECT DISTINCT o.OrderId, o.PurchaseDate, o.DeliveryDate, o.Total
+        $query = "SELECT DISTINCT o.OrderId, o.Email, o.PurchaseDate, o.DeliveryDate, o.Total
             FROM includes i
             LEFT JOIN ONLINE_ORDERS o ON o.OrderId = i.OrderId
             WHERE Status = 'Pending'
@@ -341,6 +397,48 @@ class DatabaseHelper {
         $statement->bind_param("s", $search);
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNotificationsByEmail($email) {
+        $statement = $this->db->prepare("SELECT * FROM NOTIFICATIONS WHERE Email = ? ORDER BY Status ASC");
+        $statement->bind_param("s", $email);
+        $statement->execute();
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getUnreadNotificationAmount($email) {
+        $statement = $this->db->prepare("SELECT COUNT(*) AS Amount FROM NOTIFICATIONS WHERE Email = ? AND Status = 'Unread'");
+        $statement->bind_param("s", $email);
+        $statement->execute();
+        $result = $statement->get_result()->fetch_assoc();
+        return $result ? $result["Amount"] : null;
+    }
+
+    public function addNotification($receiverEmail, $description) {
+        $statement = $this->db->prepare("INSERT INTO NOTIFICATIONS (NotificationId, Status, Description, Email) VALUES (?, ?, ?, ?)");
+        $notificationId = uniqid("N-");
+        $status = "Unread";
+        $statement->bind_param("ssss", $notificationId, $status, $description, $receiverEmail);
+        return $statement->execute();
+    }
+
+    public function deleteNotification($id) {
+        $statement = $this->db->prepare("DELETE FROM NOTIFICATIONS WHERE NotificationId = ?");
+        $statement->bind_param("s", $id);
+        return $statement->execute();
+    }
+
+    public function readNotification($id) {
+        $statement = $this->db->prepare("UPDATE NOTIFICATIONS SET Status = ? WHERE NotificationId = ?");
+        $status = "Read";
+        $statement->bind_param("ss", $status, $id);
+        return $statement->execute();
+    }
+
+    public function confirmDelivery($orderId) {
+        $statement = $this->db->prepare("UPDATE ONLINE_ORDERS SET Status = 'Delivered' WHERE OrderId = ?");
+        $statement->bind_param("s", $orderId);
+        return $statement->execute();
     }
 
 }

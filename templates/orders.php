@@ -1,5 +1,6 @@
+<?php require_once "handlers/theme_handler.php"; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="<?php echo $theme; ?>">
 
 <head>
     <meta charset="utf-8">
@@ -30,7 +31,7 @@
                         <td><?php echo $order["PurchaseDate"] ?></td>
                         <td><?php echo $order["DeliveryDate"] ?></td>
                         <td><?php echo $order["Total"] ?>€</td>
-                        <td><a href="handlers/ship_order.php?orderId=<?php echo $order['OrderId']; ?>" type="submit" class="btn btn-primary">Ship</a></td>
+                        <td><a href="handlers/ship_order.php?orderId=<?php echo $order['OrderId']; ?>&email=<?php echo $order["Email"]; ?>" type="submit" class="btn btn-primary">Ship</a></td>
                         <td>
                             <table class="table">
                                 <thead>

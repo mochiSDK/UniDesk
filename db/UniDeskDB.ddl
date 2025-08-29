@@ -23,6 +23,13 @@ create table CUSTOMERS (
      IsVendor boolean not null,
      constraint ID_CUSTOMER_ID primary key (Email));
 
+create table NOTIFICATIONS (
+     NotificationId char(254) not null,
+     Status char(254) not null,
+     Description char(254) not null,
+     Email char(254) not null,
+     constraint ID_NOTIFICATION_ID primary key (NotificationId));
+
 create table includes (
      OrderId char(254) not null,
      ProductId char(254) not null,
@@ -91,6 +98,10 @@ alter table contains add constraint FKcon_CAR_FK
 --     check(exists(select * from CARTS
 --                  where CARTS.Email = Email)); 
 
+alter table NOTIFICATIONS add constraint FKreceives_FK
+     foreign key (Email)
+     references CUSTOMERS (Email);
+
 alter table includes add constraint FKinc_PRO
      foreign key (ProductId)
      references PRODUCTS (ProductId);
@@ -134,6 +145,12 @@ create index FKcon_CAR_IND
 
 create unique index ID_CUSTOMER_IND
      on CUSTOMERS (Email);
+
+create unique index ID_NOTIFICATION_IND
+     on NOTIFICATIONS (NotificationId);
+
+create index FKreceives_IND
+     on NOTIFICATIONS (Email);
 
 create unique index ID_includes_IND
      on includes (ProductId, OrderId);

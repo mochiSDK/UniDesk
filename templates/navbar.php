@@ -7,21 +7,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item me-2">
-                    <button id="themetoggle" type="button" class="btn btn-outline-secondary" data-bs-toggle="button"><i class="bi-brightness-high-fill"></i></button>
-                    <script>
-                        const toggleButton = document.getElementById('themetoggle')
-                        const themeIcon = toggleButton.querySelector("i")
-                        toggleButton.addEventListener("click", () => {
-                            const isActive = toggleButton.classList.contains("active")
-                            document.documentElement.setAttribute("data-bs-theme", isActive ? "dark" : "light")
-                            themeIcon.classList.toggle("bi-moon-stars-fill", isActive)
-                            themeIcon.classList.toggle("bi-brightness-high-fill", !isActive)
-                        })
-                    </script>
+            <ul class="navbar-nav ms-auto mb-2 mt-2">
+                <li class="nav-item me-3">
+                    <form method="post">
+                        <input type="hidden" name="theme" value="<?php echo $theme === 'dark' ? 'light' : 'dark'; ?>">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="<?php echo $theme === "dark" ? "bi-brightness-high-fill" : "bi-moon-stars-fill"; ?>"></i>
+                        </button>
+                    </form>
                 </li>
-                <li class="nav-item me-2">
+                <li class="nav-item me-3">
                     <div class="input-group">
                         <div class="input-group-text" id="btnGroupAddon2"><i class="bi bi-search"></i></div>
                         <form method="get" action="search.php">
@@ -29,11 +24,19 @@
                         </form>
                     </div>
                 </li>
-                <li class="nav-item me-2">
+                <li class="nav-item me-3">
                     <a href="cart.php" role="button" class="btn btn-outline-secondary"><i class="bi bi-cart-fill"></i></a>
                 </li>
-                <li class="nav-item me-2">
-                    <a href="#" role="button" class="btn btn-outline-secondary"><i class="bi bi-bell-fill"></i></a>
+                <li class="nav-item me-3">
+                    <a href="notifications.php" role="button" class="btn btn-outline-secondary position-relative">
+                        <i class="bi bi-bell-fill"></i>
+                        <?php if ($templateParams["notificationsAmount"] > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php echo $templateParams["notificationsAmount"]; ?>
+                                <span class="visually-hidden">Unread notifications</span>
+                            </span>
+                        <?php endif; ?>
+                    </a>
                 </li>
                 <li class="nav-item dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

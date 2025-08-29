@@ -1,5 +1,6 @@
+<?php require_once "handlers/theme_handler.php"; ?>
 <!DOCTYPE html>
-<html>
+<html lang="en" data-bs-theme="<?php echo $theme; ?>">
 
 <head>
     <meta charset="utf-8">
@@ -10,6 +11,20 @@
 
 <body>
     <?php require_once "navbar_controller.php"; ?>
+    <div class="container mt-4">
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['success_message']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['success_message']); ?>
+        <?php elseif (isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['error_message']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
     <div class="container text-start">
         <div class="row flex-nowrap overflow-auto">
             <?php foreach ($templateParams["categories"] as $category): ?>

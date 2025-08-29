@@ -1,5 +1,6 @@
+<?php require_once "handlers/theme_handler.php"; ?>
 <!doctype html>
-<html lang="it">
+<html lang="en" data-bs-theme="<?php echo $theme; ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
