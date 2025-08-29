@@ -9,17 +9,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mt-2">
                 <li class="nav-item me-3">
-                    <button id="themetoggle" type="button" class="btn btn-outline-secondary" data-bs-toggle="button"><i class="bi-brightness-high-fill"></i></button>
-                    <script>
-                        const toggleButton = document.getElementById('themetoggle')
-                        const themeIcon = toggleButton.querySelector("i")
-                        toggleButton.addEventListener("click", () => {
-                            const isActive = toggleButton.classList.contains("active")
-                            document.documentElement.setAttribute("data-bs-theme", isActive ? "dark" : "light")
-                            themeIcon.classList.toggle("bi-moon-stars-fill", isActive)
-                            themeIcon.classList.toggle("bi-brightness-high-fill", !isActive)
-                        })
-                    </script>
+                    <form method="post">
+                        <input type="hidden" name="theme" value="<?php echo $theme === 'dark' ? 'light' : 'dark'; ?>">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="<?php echo $theme === "dark" ? "bi-brightness-high-fill" : "bi-moon-stars-fill"; ?>"></i>
+                        </button>
+                    </form>
                 </li>
                 <li class="nav-item me-3">
                     <div class="input-group">

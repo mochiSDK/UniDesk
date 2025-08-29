@@ -1,5 +1,6 @@
+<?php require_once "handlers/theme_handler.php"; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="<?php echo $theme; ?>">
 
 <head>
     <meta charset="utf-8">
