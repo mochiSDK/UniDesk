@@ -68,8 +68,13 @@ require_once 'navbar_controller.php';
                     
                     <!-- Buttons container -->
                     <div class="d-grid gap-2 mt-4 action-buttons-container">
-                        <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cart-plus"></i> Add to cart</button>
-                        <button type="button" class="btn btn-compare"><i class="bi bi-arrow-left-right"></i> Compare</button>
+                                                
+                        <?php if ($product['Amount'] > 0): ?>
+                            <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cart-plus"></i> Add to cart</button>
+                        <?php else: ?>
+                            <button type="button" class="btn btn-secondary btn-lg" disabled><i class="bi bi-x-circle"></i> Out of stock</button>
+                        <?php endif; ?>
+                        
                     </div>
                 </form>
                 <!-- End of form -->

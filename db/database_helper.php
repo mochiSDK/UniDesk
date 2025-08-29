@@ -65,13 +65,27 @@ class DatabaseHelper {
         }
 
         $cartItems = $this->getCartItems($cartId);
+
+        $vendors = $this->getVendors();
         
         $stmt_includes = $this->db->prepare("INSERT INTO includes (OrderId, ProductId) VALUES (?, ?)");
         foreach ($cartItems as $item) {
             $productId = $item['ProductId'];
+            $productName = $item['Name'];
+            $currentStock = $item['Amount'];
+            
             $stmt_includes->bind_param("ss", $orderId, $productId);
             $stmt_includes->execute();
             $this->decreaseProductStock($productId, 1);
+            
+            if (($currentStock - 1) == 0) {
+                if ($vendors) {
+                    $stock_notification_message = "The product '{$productName}' is now out of stock.";
+                    foreach ($vendors as $vendor) {
+                        $this->addNotification($vendor['Email'], $stock_notification_message);
+                    }
+                }
+            }
         }
 
         $stmt_clear = $this->db->prepare("DELETE FROM contains WHERE CartId = ?");
