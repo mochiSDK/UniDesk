@@ -82,3 +82,31 @@ body {
     background-color: #6a4fe1;
     border-color: #6a4fe1;
 }
+[data-bs-theme="dark"] body {
+    background-color: #212529;
+}
+
+[data-bs-theme="dark"] .cart-items-container,
+[data-bs-theme="dark"] .summary-card {
+    background-color: #343a40;
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .cart-header,
+[data-bs-theme="dark"] .item-details {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .cart-item,
+[data-bs-theme="dark"] .cart-header {
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .item-name,
+[data-bs-theme="dark"] .item-price,
+[data-bs-theme="dark"] .summary-row,
+[data-bs-theme="dark"] .summary-total,
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h4 {
+    color: #f8f9fa;
+}

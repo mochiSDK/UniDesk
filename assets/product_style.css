@@ -89,3 +89,21 @@ body {
     background-color: #e9e4ff;
 }
 
+/* --- Stili per il Tema Scuro --- */
+[data-bs-theme="dark"] body {
+    background-color: #212529;
+}
+
+[data-bs-theme="dark"] .product-card {
+    background-color: #343a40;
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .product-title,
+[data-bs-theme="dark"] .details-list strong {
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .details-list {
+    color: #adb5bd;
+}
