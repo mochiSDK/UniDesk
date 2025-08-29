@@ -45,35 +45,6 @@ values ("Yellow", "P1"),
        ("Green", "P1"),
        ("Pink", "P1");
 
-insert into CARTS
-values ("C0", "mario.rossi@unibo.it"),
-       ("C1", "virginia.trevisan@studio.unibo.it"),
-       ("C2", "fabiola.pisani@studio.unibo.it"),
-       ("C3", "giuseppe.fiorentini@studio.unibo.it"),
-       ("C4", "valentino.russo@studio.unibo.it"),
-       ("C5", "rosanna.pagnotto@studio.unibo.it"),
-       ("C6", "isotta.sagese@studio.unibo.it"),
-       ("C7", "viviano.colombo@studio.unibo.it"),
-       ("C8", "elvio.ricci@studio.unibo.it"),
-       ("C9", "emanuele.greco@studio.unibo.it"),
-       ("C10", "simona.bergamaschi@studio.unibo.it"),
-       ("C11", "caterina.marchesi@studio.unibo.it");
-
-insert into contains
-values ("C0", "P0"),
-       ("C0", "P1"),
-       ("C1", "P2"),
-       ("C2", "P3"),
-       ("C3", "P4"),
-       ("C4", "P5"),
-       ("C5", "P6"),
-       ("C6", "P7"),
-       ("C7", "P8"),
-       ("C8", "P9"),
-       ("C9", "P10"),
-       ("C10", "P11"),
-       ("C11", "P12");
-
 insert into ONLINE_ORDERS
 values ("O0", "mario.rossi@unibo.it", 7.80, "Delivered", '2025-07-01', '2025-07-05'),
        ("O1", "virginia.trevisan@studio.unibo.it", 4.80, "Pending", '2025-07-02', '2025-07-06'),
