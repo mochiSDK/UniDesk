@@ -94,7 +94,7 @@
                   <td><?php echo $product["DeliveryDate"]; ?></td>
                   <td><?php echo $product["Status"]; ?></td>
                   <td>
-                    <a href="handlers/confirm_delivery.php?orderId=<?php echo urlencode($product['OrderId']); ?>" type="submit" class="btn btn-primary <?php if ($product["Status"] == "Delivered"): ?>disabled<?php endif; ?>">
+                    <a href="handlers/confirm_delivery.php?orderId=<?php echo urlencode($product['OrderId']); ?>" type="submit" class="btn btn-primary <?php if ($product["Status"] == "Delivered" or $product["Status"] == "Pending"): ?>disabled<?php endif; ?>">
                       Confirm delivery
                     </a>
                   </td>
