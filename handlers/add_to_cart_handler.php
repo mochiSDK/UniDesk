@@ -2,8 +2,7 @@
 require_once("../bootstrap.php");
 
 if (!isset($_SESSION['user_email']) || empty($_SESSION['user_email'])) {
-    // Se non è loggato, salva un messaggio di errore e reindirizza
-    $_SESSION['error_message'] = "Devi essere loggato per aggiungere prodotti al carrello.";
+    $_SESSION['error_message'] = "Sign In to add products to cart.";
     header("Location: ../signin_form.php");
     exit();
 }
@@ -20,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ProductId'])) {
 
     if ($cart_id && !$db_helper->isProductInCart($cart_id, $product_id)) {
         $db_helper->addProductToCart($cart_id, $product_id);
-        $_SESSION['success_message'] = "Prodotto aggiunto al carrello!";
+        $_SESSION['success_message'] = "Product added to cart!";
     } else {
-        $_SESSION['success_message'] = "Questo prodotto è già nel tuo carrello.";
+        $_SESSION['success_message'] = "This product is already in the cart.";
     }
     
     header("Location: " . $_SERVER['HTTP_REFERER']);
