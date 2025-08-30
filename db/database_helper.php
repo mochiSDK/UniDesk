@@ -16,6 +16,12 @@ class DatabaseHelper {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function removeProductFromCart($cartId, $productId) {
+        $stmt = $this->db->prepare("DELETE FROM contains WHERE CartId = ? AND ProductId = ?");
+        $stmt->bind_param("ss", $cartId, $productId);
+        return $stmt->execute();
+    }
+
     public function getUserByEmail($email) {
         $stmt = $this->db->prepare("SELECT * FROM CUSTOMERS WHERE Email = ?");
         $stmt->bind_param("s", $email);
@@ -52,7 +58,7 @@ class DatabaseHelper {
     }
 
     public function createOrderFromCart($email, $cartId, $total) {
-        $orderId = uniqid("ORD-");
+        $orderId = uniqid("O-");
         $purchaseDate = date("Y-m-d H:i:s"); 
         $status = "Pending";
         $deliveryDate = date('Y-m-d', strtotime('+1 day'));
