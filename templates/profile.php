@@ -14,7 +14,7 @@
   <div class="container-fluid">
     <div class="row">
       <!-- Profile Card -->
-      <div class="col-auto">
+      <div class="col-auto mx-auto">
         <div class="card text-center my-3" style="width: 18rem;">
           <div class="card-body">
             <h5 class="card-title"><?php echo $_SESSION["username"]; ?></h5>
@@ -67,40 +67,42 @@
       <!-- Order history -->
       <div class="col">
         <h1 class="my-2">Order History</h1>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" style="width: 15%;">Image</th>
-              <th scope="col">Name</th>
-              <th scope="col">Brand</th>
-              <th scope="col">Price</th>
-              <th scope="col">Purchase Date</th>
-              <th scope="col">Delivery Date</th>
-              <th scope="col">Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($templateParams["productHistory"] as $product): ?>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
               <tr>
-                <td><?php echo $product["OrderId"]; ?></td>
-                <td><img src="<?php echo $product["Picture"]; ?>" class="img-thumbnail w-50" alt="..."></td>
-                <td><?php echo $product["Name"]; ?></td>
-                <td><?php echo $product["Brand"]; ?></td>
-                <td><?php echo $product["Price"]; ?>€</td>
-                <td><?php echo $product["PurchaseDate"]; ?></td>
-                <td><?php echo $product["DeliveryDate"]; ?></td>
-                <td><?php echo $product["Status"]; ?></td>
-                <td>
-                  <a href="handlers/confirm_delivery.php?orderId=<?php echo urlencode($product['OrderId']); ?>" id="confirmDelivery<?php echo $product["OrderId"]; ?>" type="submit" class="btn btn-primary <?php if ($product["Status"] == "Delivered"): ?>disabled<?php endif; ?>">
-                    Confirm delivery
-                  </a>
-                </td>
+                <th scope="col">#</th>
+                <th scope="col" style="width: 15%;">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Price</th>
+                <th scope="col">Purchase Date</th>
+                <th scope="col">Delivery Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
               </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <?php foreach ($templateParams["productHistory"] as $product): ?>
+                <tr>
+                  <td><?php echo $product["OrderId"]; ?></td>
+                  <td><img src="<?php echo $product["Picture"]; ?>" class="img-thumbnail w-50" alt="..."></td>
+                  <td><?php echo $product["Name"]; ?></td>
+                  <td><?php echo $product["Brand"]; ?></td>
+                  <td><?php echo $product["Price"]; ?>€</td>
+                  <td><?php echo $product["PurchaseDate"]; ?></td>
+                  <td><?php echo $product["DeliveryDate"]; ?></td>
+                  <td><?php echo $product["Status"]; ?></td>
+                  <td>
+                    <a href="handlers/confirm_delivery.php?orderId=<?php echo urlencode($product['OrderId']); ?>" type="submit" class="btn btn-primary <?php if ($product["Status"] == "Delivered"): ?>disabled<?php endif; ?>">
+                      Confirm delivery
+                    </a>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
