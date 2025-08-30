@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newWidth = $_POST["productWidth"];
 
     $newImage = "";
-    if (isset($_FILES["productImage"])) {
+    if ($_FILES["productImage"]["error"] === UPLOAD_ERR_OK) {
         $file = $_FILES["productImage"];
         $targetPath = $imgDir . basename($file["name"]);
         move_uploaded_file($file["tmp_name"], $targetPath);
