@@ -17,7 +17,7 @@
         </div>
         <div class="row mb-2">
             <div class="col">
-                <div class="input-group ms-auto" style="max-width: 25%;">
+                <div class="input-group ms-auto d-flex justify-content-end">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon" data-bs-toggle="modal" data-bs-target="#addProductModal"><i class="bi bi-plus-circle-fill"></i></button>
                     <form method="get" action="inventory.php">
                         <input name="query" type="text" class="form-control" placeholder="Search product" aria-label="Search" aria-describedby="button-addon">
@@ -97,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row table-responsive">
             <table class="table">
                 <thead>
                     <tr>

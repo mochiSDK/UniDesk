@@ -7,28 +7,28 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mt-2">
-                <li class="nav-item me-3">
+            <ul class="navbar-nav ms-auto mt-2 mb-2">
+                <li class="nav-item me-lg-3 mb-2 mb-lg-0">
                     <form method="post">
                         <input type="hidden" name="theme" value="<?php echo $theme === 'dark' ? 'light' : 'dark'; ?>">
-                        <button type="submit" class="btn btn-outline-secondary">
+                        <button type="submit" class="btn btn-outline-secondary w-100 w-lg-auto">
                             <i class="<?php echo $theme === "dark" ? "bi-brightness-high-fill" : "bi-moon-stars-fill"; ?>"></i>
                         </button>
                     </form>
                 </li>
-                <li class="nav-item me-3">
-                    <div class="input-group">
-                        <div class="input-group-text" id="btnGroupAddon2"><i class="bi bi-search"></i></div>
-                        <form method="get" action="search.php">
+                <li class="nav-item me-lg-3 mb-2 mb-lg-0">
+                    <form method="get" action="search.php" class="w-100 w-lg-auto">
+                        <div class="input-group">
+                            <div class="input-group-text" id="btnGroupAddon2"><i class="bi bi-search"></i></div>
                             <input name="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </li>
-                <li class="nav-item me-3">
-                    <a href="cart.php" role="button" class="btn btn-outline-secondary"><i class="bi bi-cart-fill"></i></a>
+                <li class="nav-item me-lg-3 mb-2 mb-lg-0">
+                    <a href="cart.php" role="button" class="btn btn-outline-secondary w-100 w-lg-auto"><i class="bi bi-cart-fill"></i></a>
                 </li>
-                <li class="nav-item me-3">
-                    <a href="notifications.php" role="button" class="btn btn-outline-secondary position-relative">
+                <li class="nav-item me-lg-3 mb-2 mb-lg-0">
+                    <a href="notifications.php" role="button" class="btn btn-outline-secondary position-relative w-100 w-lg-auto">
                         <i class="bi bi-bell-fill"></i>
                         <?php if ($templateParams["notificationsAmount"] > 0): ?>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-secondary dropdown-toggle w-100 w-lg-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-fill"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
