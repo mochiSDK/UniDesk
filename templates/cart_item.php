@@ -11,7 +11,6 @@
                 <div>
                     <h5 class="item-name"><?php echo htmlspecialchars($item['Name']); ?></h5>
                     <p class="item-details">Item no: <?php echo htmlspecialchars($item['ProductId']); ?></p>
-                    <p class="item-details">Quantity: 1</p>
                     <div class="item-actions">
                         <form action="handlers/cart_handler.php" method="POST">
                             <input type="hidden" name="ProductId" value="<?php echo htmlspecialchars($item['ProductId']); ?>">
