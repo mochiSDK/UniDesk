@@ -401,7 +401,7 @@ class DatabaseHelper {
     }
 
     public function getNotificationsByEmail($email) {
-        $statement = $this->db->prepare("SELECT * FROM NOTIFICATIONS WHERE Email = ? ORDER BY Status ASC");
+        $statement = $this->db->prepare("SELECT * FROM NOTIFICATIONS WHERE Email = ? ORDER BY Status DESC");
         $statement->bind_param("s", $email);
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
