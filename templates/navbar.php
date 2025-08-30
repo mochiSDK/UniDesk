@@ -20,15 +20,16 @@
                     <form method="get" action="search.php" class="w-100 w-lg-auto">
                         <div class="input-group">
                             <div class="input-group-text" id="btnGroupAddon2"><i class="bi bi-search"></i></div>
-                            <input name="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                            <label for="navbarSearch" class="visually-hidden">Search</label>
+                            <input id="navbarSearch" name="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
                         </div>
                     </form>
                 </li>
                 <li class="nav-item me-lg-3 mb-2 mb-lg-0">
-                    <a href="cart.php" role="button" class="btn btn-outline-secondary w-100 w-lg-auto"><i class="bi bi-cart-fill"></i></a>
+                    <a href="cart.php" role="button" class="btn btn-outline-secondary w-100 w-lg-auto" title="Clicking this will redirect to cart page"><i class="bi bi-cart-fill"></i></a>
                 </li>
                 <li class="nav-item me-lg-3 mb-2 mb-lg-0">
-                    <a href="notifications.php" role="button" class="btn btn-outline-secondary position-relative w-100 w-lg-auto">
+                    <a href="notifications.php" role="button" class="btn btn-outline-secondary position-relative w-100 w-lg-auto" title="Clicking this will redirect you to notification page">
                         <i class="bi bi-bell-fill"></i>
                         <?php if ($templateParams["notificationsAmount"] > 0): ?>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
